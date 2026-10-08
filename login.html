@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ExamPortal | Login</title>
+
+
+    <style>
+
+        /* =====================================
+           RESET
+        ===================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+
+        /* =====================================
+           BODY
+        ===================================== */
+
+        body {
+            min-height: 100vh;
+
+            background: #f4f7f6;
+
+            color: #172727;
+        }
+
+
+        /* =====================================
+           BACKGROUND
+        ===================================== */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 10% 15%,
+                    rgba(30, 125, 119, 0.10),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 90% 85%,
+                    rgba(81, 207, 174, 0.12),
+                    transparent 30%
+                );
+
+            pointer-events: none;
+
+            z-index: -1;
+        }
+
+
+        /* =====================================
+           HEADER
+        ===================================== */
+
+        .header {
+
+            height: 78px;
+
+            width: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            background: #ffffff;
+
+            border-bottom: 1px solid #e1e8e6;
+        }
+
+
+        /* LOGO */
+
+        .logo-area {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            text-decoration: none;
+
+            color: #153535;
+        }
+
+
+        .logo-area img {
+
+            width: 43px;
+
+            height: 43px;
+
+            object-fit: contain;
+
+            border-radius: 9px;
+        }
+
+
+        .logo-text {
+
+            font-size: 22px;
+
+            font-weight: 800;
+
+            letter-spacing: -0.4px;
+        }
+
+
+        .logo-text span {
+
+            color: #17696a;
+        }
+
+
+        /* HOME BUTTON */
+
+        .home-btn {
+
+            text-decoration: none;
+
+            padding: 10px 17px;
+
+            border-radius: 8px;
+
+            background: #ffffff;
+
+            border: 1px solid #d8e2df;
+
+            color: #5f706e;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            transition: 0.2s;
+        }
+
+
+        .home-btn:hover {
+
+            color: #155e60;
+
+            border-color: #7db8b1;
+        }
+
+
+        /* =====================================
+           MAIN
+        ===================================== */
+
+        .main {
+
+            min-height: calc(100vh - 78px);
+
+            max-width: 1180px;
+
+            margin: auto;
+
+            padding: 55px 30px 70px;
+
+            display: grid;
+
+            grid-template-columns: 1fr 400px;
+
+            gap: 80px;
+
+            align-items: center;
+        }
+
+
+        /* =====================================
+           LEFT SECTION
+        ===================================== */
+
+        .left-section {
+
+            padding-left: 10px;
+        }
+
+
+        .tag {
+
+            display: inline-block;
+
+            padding: 8px 14px;
+
+            border-radius: 20px;
+
+            background: #e4f1ef;
+
+            border: 1px solid #cfe4e1;
+
+            color: #155e60;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .left-section h1 {
+
+            font-size: 60px;
+
+            line-height: 1.05;
+
+            letter-spacing: -2.5px;
+
+            color: #162727;
+
+            margin-bottom: 22px;
+        }
+
+
+        .left-section h1 span {
+
+            color: #17696a;
+        }
+
+
+        .left-section > p {
+
+            max-width: 550px;
+
+            color: #6b7b79;
+
+            font-size: 15px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =====================================
+           FEATURES
+        ===================================== */
+
+        .features {
+
+            display: flex;
+
+            gap: 14px;
+
+            margin-top: 38px;
+        }
+
+
+        .feature {
+
+            width: 150px;
+
+            padding: 15px;
+
+            background: #ffffff;
+
+            border: 1px solid #dfe7e5;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 10px 25px
+                rgba(25, 55, 54, 0.06);
+        }
+
+
+        .feature-icon {
+
+            width: 36px;
+
+            height: 36px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #e5f2f0;
+
+            color: #155e60;
+
+            border-radius: 9px;
+
+            font-size: 16px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .feature h3 {
+
+            font-size: 12px;
+
+            color: #203332;
+
+            margin-bottom: 5px;
+        }
+
+
+        .feature p {
+
+            font-size: 9px;
+
+            line-height: 1.5;
+
+            color: #7b8987;
+        }
+
+
+        /* =====================================
+           LOGIN CARD
+        ===================================== */
+
+        .login-card {
+
+            background: #ffffff;
+
+            border: 1px solid #dfe7e5;
+
+            border-radius: 18px;
+
+            padding: 32px;
+
+            box-shadow:
+                0 25px 60px
+                rgba(25, 55, 54, 0.12);
+        }
+
+
+        /* LOGIN HEADING */
+
+        .login-heading {
+
+            text-align: center;
+
+            margin-bottom: 25px;
+        }
+
+
+        .login-heading h2 {
+
+            font-size: 28px;
+
+            color: #172727;
+
+            margin-bottom: 7px;
+        }
+
+
+        .login-heading p {
+
+            font-size: 11px;
+
+            color: #7a8887;
+        }
+
+
+        /* =====================================
+           MESSAGE
+        ===================================== */
+
+        .message {
+
+            display: none;
+
+            padding: 10px;
+
+            margin-bottom: 15px;
+
+            border-radius: 8px;
+
+            font-size: 10px;
+
+            text-align: center;
+        }
+
+
+        .message.error {
+
+            display: block;
+
+            color: #a13d3d;
+
+            background: #fff0f0;
+
+            border: 1px solid #f1cccc;
+        }
+
+
+        .message.success {
+
+            display: block;
+
+            color: #26705f;
+
+            background: #edf8f4;
+
+            border: 1px solid #cce8df;
+        }
+
+
+        /* =====================================
+           LOGIN TYPE
+        ===================================== */
+
+        .label {
+
+            display: block;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            color: #536462;
+
+            margin-bottom: 8px;
+        }
+
+
+        .user-types {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 9px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .type-btn {
+
+            height: 44px;
+
+            border: 1px solid #dbe4e2;
+
+            border-radius: 9px;
+
+            background: #f8faf9;
+
+            color: #71807f;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .type-btn:hover {
+
+            border-color: #7db8b1;
+
+            color: #155e60;
+        }
+
+
+        .type-btn.active {
+
+            background: #e8f4f2;
+
+            border-color: #155e60;
+
+            color: #155e60;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================
+           INPUT GROUP
+        ===================================== */
+
+        .input-group {
+
+            margin-bottom: 15px;
+        }
+
+
+        .input-group label {
+
+            display: block;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            color: #536462;
+
+            margin-bottom: 7px;
+        }
+
+
+        .input-group input {
+
+            width: 100%;
+
+            height: 45px;
+
+            padding: 0 13px;
+
+            border: 1px solid #d8e2df;
+
+            border-radius: 9px;
+
+            background: #f9fbfa;
+
+            color: #263837;
+
+            font-size: 12px;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+
+        .input-group input:focus {
+
+            background: #ffffff;
+
+            border-color: #287f7d;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(40, 127, 125, 0.08);
+        }
+
+
+        .input-group input::placeholder {
+
+            color: #9aa7a5;
+        }
+
+
+        /* =====================================
+           OPTIONS
+        ===================================== */
+
+        .options {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin: 4px 0 20px;
+        }
+
+
+        .remember {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #778482;
+
+            font-size: 10px;
+        }
+
+
+        .remember input {
+
+            accent-color: #155e60;
+        }
+
+
+        .forgot {
+
+            color: #287f7d;
+
+            text-decoration: none;
+
+            font-size: 10px;
+
+            font-weight: 600;
+        }
+
+
+        .forgot:hover {
+
+            color: #155e60;
+        }
+
+
+        /* =====================================
+           LOGIN BUTTON
+        ===================================== */
+
+        .login-btn {
+
+            width: 100%;
+
+            height: 46px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #155e60,
+                    #278c83
+                );
+
+            color: #ffffff;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 24px
+                rgba(21, 94, 96, 0.20);
+
+            transition: 0.2s;
+        }
+
+
+        .login-btn:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 14px 28px
+                rgba(21, 94, 96, 0.25);
+        }
+
+
+        /* =====================================
+           REGISTER
+        ===================================== */
+
+        .register {
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #7b8987;
+
+            font-size: 10px;
+        }
+
+
+        .register a {
+
+            color: #17696a;
+
+            text-decoration: none;
+
+            font-weight: 700;
+        }
+
+
+        .register a:hover {
+
+            color: #155e60;
+        }
+
+
+        /* =====================================
+           RESPONSIVE
+        ===================================== */
+
+        @media (max-width: 900px) {
+
+            .main {
+
+                grid-template-columns: 1fr;
+
+                max-width: 600px;
+
+                gap: 40px;
+
+                padding-top: 40px;
+            }
+
+
+            .left-section {
+
+                text-align: center;
+
+                padding-left: 0;
+            }
+
+
+            .left-section > p {
+
+                margin: auto;
+            }
+
+
+            .features {
+
+                justify-content: center;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .header {
+
+                padding: 16px 20px;
+            }
+
+
+            .main {
+
+                padding: 35px 20px 50px;
+            }
+
+
+            .left-section h1 {
+
+                font-size: 43px;
+            }
+
+
+            .features {
+
+                flex-direction: column;
+
+                align-items: center;
+            }
+
+
+            .feature {
+
+                width: 100%;
+
+                max-width: 260px;
+
+                text-align: left;
+            }
+
+
+            .login-card {
+
+                padding: 25px 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================
+         HEADER
+    ===================================== -->
+
+    <header class="header">
+
+        <a href="/index.html"
+           class="logo-area">
+
+            <img src="/logo.png"
+                 alt="ExamPortal">
+
+            <div class="logo-text">
+
+                Exam<span>Portal</span>
+
+            </div>
+
+        </a>
+
+
+        <a href="index.html"
+           class="home-btn">
+
+            ← Back to Home
+
+        </a>
+
+    </header>
+
+
+
+    <!-- =====================================
+         MAIN CONTENT
+    ===================================== -->
+
+    <main class="main">
+
+
+        <!-- =================================
+             LEFT SIDE
+        ================================== -->
+
+        <section class="left-section">
+
+
+            <div class="tag">
+
+                SECURE ONLINE EXAMINATION
+
+            </div>
+
+
+            <h1>
+
+                Welcome to
+                <span>ExamPortal.</span>
+
+            </h1>
+
+
+            <p>
+
+                Access your examination workspace,
+                attend online assessments, manage your
+                profile and check your results through
+                one simple platform.
+
+            </p>
+
+
+            <!-- FEATURES -->
+
+            <div class="features">
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ✓
+                    </div>
+
+                    <h3>
+                        Easy Access
+                    </h3>
+
+                    <p>
+                        Simple and organized
+                        examination access.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ◈
+                    </div>
+
+                    <h3>
+                        Online Exams
+                    </h3>
+
+                    <p>
+                        Attend assessments
+                        digitally.
+                    </p>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ↗
+                    </div>
+
+                    <h3>
+                        Results
+                    </h3>
+
+                    <p>
+                        View your performance
+                        after exams.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             LOGIN CARD
+        ================================== -->
+
+        <section class="login-card">
+
+
+            <div class="login-heading">
+
+                <h2>
+                    Sign In
+                </h2>
+
+                <p>
+                    Select your account type to continue
+                </p>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div id="message"
+                 class="message">
+
+            </div>
+
+
+            <!-- LOGIN TYPE -->
+
+            <label class="label">
+
+                Login As
+
+            </label>
+
+
+            <div class="user-types">
+
+
+                <button
+                    type="button"
+                    class="type-btn active"
+                    id="studentBtn"
+                    onclick="selectType('Student')">
+
+                    Student
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="type-btn"
+                    id="adminBtn"
+                    onclick="selectType('Admin')">
+
+                    Admin
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- =================================
+                 LOGIN FORM
+            ================================== -->
+
+            <form id="loginForm">
+
+
+                <!-- NAME -->
+
+                <div class="input-group">
+
+                    <label for="userName">
+
+                        Name
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="userName"
+                        placeholder="Enter your name"
+                        autocomplete="name"
+                        required>
+
+                </div>
+
+
+
+                <!-- EMAIL OR PHONE -->
+
+                <div class="input-group">
+
+                    <label for="contact">
+
+                        Email or Phone Number
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="contact"
+                        placeholder="Enter email or phone number"
+                        autocomplete="email"
+                        required>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="input-group">
+
+                    <label for="password">
+
+                        Password
+
+                    </label>
+
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required>
+
+                </div>
+
+
+
+                <!-- OPTIONS -->
+
+                <div class="options">
+
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            id="remember">
+
+                        Remember me
+
+                    </label>
+
+
+                    <a href="#"
+                       class="forgot"
+                       onclick="forgotPassword(event)">
+
+                        Forgot password?
+
+                    </a>
+
+
+                </div>
+
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-btn">
+
+                    Login to ExamPortal →
+
+                </button>
+
+
+            </form>
+
+
+
+            <!-- REGISTER -->
+
+            <div class="register">
+
+                Don't have an account?
+
+                <a href="/register.html">
+
+                    Create Account
+
+                </a>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ===================================== -->
+
+    <script>
+
+
+        /* =====================================
+           CURRENT LOGIN TYPE
+        ===================================== */
+
+        let selectedType = "Student";
+
+
+        /* =====================================
+           GET LOGIN TYPE FROM HOME PAGE
+        ===================================== */
+
+        const urlParams =
+            new URLSearchParams(window.location.search);
+
+        const loginType =
+            urlParams.get("type");
+
+        if (loginType === "admin") {
+            selectType("Admin");
+        }
+        else {
+            selectType("Student");
+        }
+
+
+
+        /* =====================================
+           SELECT STUDENT / ADMIN
+        ===================================== */
+
+        function selectType(type) {
+
+            selectedType = type;
+
+
+            const studentBtn =
+                document.getElementById("studentBtn");
+
+
+            const adminBtn =
+                document.getElementById("adminBtn");
+
+
+            studentBtn.classList.remove("active");
+
+            adminBtn.classList.remove("active");
+
+
+            if (type === "Student") {
+
+                studentBtn.classList.add("active");
+
+            }
+            else {
+
+                adminBtn.classList.add("active");
+
+            }
+
+
+            clearMessage();
+
+        }
+
+
+
+        /* =====================================
+           SHOW MESSAGE
+        ===================================== */
+
+        function showMessage(text, type) {
+
+            const message =
+                document.getElementById("message");
+
+
+            message.textContent = text;
+
+
+            message.className =
+                "message " + type;
+
+        }
+
+
+
+        /* =====================================
+           CLEAR MESSAGE
+        ===================================== */
+
+        function clearMessage() {
+
+            const message =
+                document.getElementById("message");
+
+
+            message.textContent = "";
+
+
+            message.className = "message";
+
+        }
+
+
+
+        /* =====================================
+           NORMALIZE TEXT
+        ===================================== */
+
+        function normalizeText(value) {
+
+            return String(value || "")
+                .trim()
+                .toLowerCase();
+
+        }
+
+
+
+        /* =====================================
+           CHECK CONTACT
+        ===================================== */
+
+        function contactMatches(
+            enteredContact,
+            account
+        ) {
+
+            const entered =
+                normalizeText(enteredContact);
+
+
+            const email =
+                normalizeText(account.email);
+
+
+            const phone =
+                normalizeText(
+                    account.phone ||
+                    account.mobile ||
+                    account.phoneNumber
+                );
+
+
+            const userId =
+                normalizeText(account.userId);
+
+
+            return (
+                entered === email ||
+                entered === phone ||
+                entered === userId
+            );
+
+        }
+
+
+
+        /* =====================================
+           SAVE LOGIN HISTORY
+        ===================================== */
+
+        function saveLoginHistory(
+            account,
+            type
+        ) {
+
+            let history =
+                JSON.parse(
+                    localStorage.getItem(
+                        "loginHistory"
+                    )
+                ) || [];
+
+
+            history.push({
+
+                name:
+                    account.name ||
+                    account.fullName ||
+                    "",
+
+                userId:
+                    account.userId ||
+                    "",
+
+                email:
+                    account.email ||
+                    "",
+
+                type: type,
+
+                timestamp:
+                    new Date().toISOString()
+
+            });
+
+
+            localStorage.setItem(
+                "loginHistory",
+                JSON.stringify(history)
+            );
+
+        }
+
+
+
+        /* =====================================
+           STUDENT LOGIN
+        ===================================== */
+
+        function loginStudent(
+            name,
+            contact,
+            password
+        ) {
+
+            const studentData =
+                localStorage.getItem(
+                    "registeredStudent"
+                );
+
+
+            if (!studentData) {
+
+                showMessage(
+                    "No registered student account found. Please register first.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            let student;
+
+
+            try {
+
+                student =
+                    JSON.parse(studentData);
+
+            }
+            catch (error) {
+
+                showMessage(
+                    "Student account data is invalid.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const storedName =
+                normalizeText(
+                    student.name ||
+                    student.fullName
+                );
+
+
+            const enteredName =
+                normalizeText(name);
+
+
+            const nameMatches =
+                enteredName === storedName;
+
+
+            const contactMatchesResult =
+                contactMatches(
+                    contact,
+                    student
+                );
+
+
+            const passwordMatches =
+                password === student.password;
+
+
+            if (
+                nameMatches &&
+                contactMatchesResult &&
+                passwordMatches
+            ) {
+
+
+                /* SAVE CURRENT USER */
+
+                localStorage.setItem(
+                    "loggedInUser",
+                    JSON.stringify({
+
+                        type: "Student",
+
+                        userId:
+                            student.userId ||
+                            "",
+
+                        name:
+                            student.name ||
+                            student.fullName ||
+                            "",
+
+                        email:
+                            student.email ||
+                            "",
+
+                        phone:
+                            student.phone ||
+                            student.mobile ||
+                            student.phoneNumber ||
+                            ""
+
+                    })
+                );
+
+
+                /* SAVE LOGIN HISTORY */
+
+                saveLoginHistory(
+                    student,
+                    "Student"
+                );
+
+
+                showMessage(
+                    "Login successful. Opening dashboard...",
+                    "success"
+                );
+
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "dashboard.html";
+
+                }, 700);
+
+            }
+            else {
+
+                showMessage(
+                    "Name, Email/Phone or Password is incorrect.",
+                    "error"
+                );
+
+            }
+
+        }
+
+
+
+        /* =====================================
+           ADMIN LOGIN
+        ===================================== */
+
+        function loginAdmin(
+            name,
+            contact,
+            password
+        ) {
+
+            const adminData =
+                localStorage.getItem(
+                    "registeredAdmin"
+                );
+
+
+            if (!adminData) {
+
+                showMessage(
+                    "No registered admin account found. Please register first.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            let admin;
+
+
+            try {
+
+                admin =
+                    JSON.parse(adminData);
+
+            }
+            catch (error) {
+
+                showMessage(
+                    "Admin account data is invalid.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const storedName =
+                normalizeText(
+                    admin.name ||
+                    admin.fullName
+                );
+
+
+            const enteredName =
+                normalizeText(name);
+
+
+            const nameMatches =
+                enteredName === storedName;
+
+
+            const contactMatchesResult =
+                contactMatches(
+                    contact,
+                    admin
+                );
+
+
+            const passwordMatches =
+                password === admin.password;
+
+
+            if (
+                nameMatches &&
+                contactMatchesResult &&
+                passwordMatches
+            ) {
+
+
+                /* SAVE CURRENT ADMIN */
+
+                localStorage.setItem(
+                    "loggedInUser",
+                    JSON.stringify({
+
+                        type: "Admin",
+
+                        userId:
+                            admin.userId ||
+                            "",
+
+                        name:
+                            admin.name ||
+                            admin.fullName ||
+                            "Administrator",
+
+                        email:
+                            admin.email ||
+                            "",
+
+                        phone:
+                            admin.phone ||
+                            admin.mobile ||
+                            admin.phoneNumber ||
+                            ""
+
+                    })
+                );
+
+
+                /* SAVE LOGIN HISTORY */
+
+                saveLoginHistory(
+                    admin,
+                    "College"
+                );
+
+
+                showMessage(
+                    "Admin login successful. Opening admin panel...",
+                    "success"
+                );
+
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "admin.html";
+
+                }, 700);
+
+            }
+            else {
+
+                showMessage(
+                    "Name, Email/Phone or Password is incorrect.",
+                    "error"
+                );
+
+            }
+
+        }
+
+
+
+        /* =====================================
+           LOGIN FORM
+        ===================================== */
+
+        document
+            .getElementById("loginForm")
+            .addEventListener(
+                "submit",
+                function(event) {
+
+
+                    event.preventDefault();
+
+
+                    /* GET FORM VALUES */
+
+                    const name =
+                        document
+                            .getElementById("userName")
+                            .value
+                            .trim();
+
+
+                    const contact =
+                        document
+                            .getElementById("contact")
+                            .value
+                            .trim();
+
+
+                    const password =
+                        document
+                            .getElementById("password")
+                            .value;
+
+
+                    /* VALIDATION */
+
+                    if (
+                        !name ||
+                        !contact ||
+                        !password
+                    ) {
+
+                        showMessage(
+                            "Please enter all details.",
+                            "error"
+                        );
+
+                        return;
+
+                    }
+
+
+                    /* STUDENT */
+
+                    if (
+                        selectedType === "Student"
+                    ) {
+
+                        loginStudent(
+                            name,
+                            contact,
+                            password
+                        );
+
+                    }
+
+
+                    /* ADMIN */
+
+                    else {
+
+                        loginAdmin(
+                            name,
+                            contact,
+                            password
+                        );
+
+                    }
+
+                }
+            );
+
+
+
+        /* =====================================
+           FORGOT PASSWORD
+        ===================================== */
+
+        function forgotPassword(event) {
+
+            event.preventDefault();
+
+
+            alert(
+                "Please contact the administrator to reset your password."
+            );
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

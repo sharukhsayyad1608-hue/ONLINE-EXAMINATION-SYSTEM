@@ -1,0 +1,1922 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ExamPortal | Profile</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background:#f5f8f8;
+            color:#173033;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           BACKGROUND GRID
+        ========================= */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+
+            background-image:
+                linear-gradient(
+                    rgba(20,123,125,.055) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(20,123,125,.055) 1px,
+                    transparent 1px
+                );
+
+            background-size: 45px 45px;
+
+            z-index: -2;
+        }
+
+        .glow1 {
+            position: fixed;
+
+            width: 450px;
+            height: 450px;
+
+            top: -170px;
+            right: -180px;
+
+            background:#55aaa8;
+
+            filter: blur(180px);
+
+            opacity:.08;
+
+            z-index: -1;
+        }
+
+        .glow2 {
+            position: fixed;
+
+            width: 450px;
+            height: 450px;
+
+            bottom: -200px;
+            left: -180px;
+
+            background:#8bc8c5;
+
+            filter: blur(180px);
+
+            opacity:.08;
+
+            z-index: -1;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+            position: fixed;
+
+            left: 0;
+            top: 0;
+            bottom: 0;
+
+            width: 198px;
+
+            background:#ffffff;
+
+            border-right:1px solid #e1e9e8;
+
+            padding: 22px 15px;
+
+            z-index: 10;
+        }
+
+        /* LOGO */
+
+        .sidebar-logo {
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding: 0 9px;
+
+            margin-bottom: 40px;
+        }
+
+        .sidebar-logo img {
+            width: 30px;
+            height: 30px;
+
+            object-fit: cover;
+
+            object-position: left;
+
+            border-radius: 7px;
+        }
+
+        .sidebar-logo span {
+            font-size: 16px;
+
+            font-weight: 700;
+        }
+
+        .sidebar-logo span span {
+            color:#147b7d;
+        }
+
+        /* MENU TITLE */
+
+        .menu-title {
+            color:#99a6a6;
+
+            font-size: 9px;
+
+            letter-spacing: 1.5px;
+
+            margin:
+                0 9px 10px;
+        }
+
+        /* MENU */
+
+        .menu {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 5px;
+        }
+
+        .menu a {
+            height: 38px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 0 13px;
+
+            border-radius: 8px;
+
+            color:#718080;
+
+            text-decoration: none;
+
+            font-size: 11px;
+
+            transition: .3s;
+        }
+
+        .menu a:hover {
+            color:#173033;
+
+            background:#edf7f7;
+        }
+
+        .menu a.active {
+            color:#ffffff;
+
+            background:#147b7d;
+
+            box-shadow:0 8px 22px rgba(20,123,125,.18);
+        }
+
+        .menu-icon {
+            width: 15px;
+
+            text-align: center;
+
+            font-size: 12px;
+        }
+
+        /* LOGOUT */
+
+        .logout {
+            position: absolute;
+
+            bottom: 25px;
+
+            left: 15px;
+            right: 15px;
+        }
+
+        .logout a {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 10px;
+
+            color:#d65b64;
+
+            text-decoration: none;
+
+            font-size: 10px;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+            margin-left: 198px;
+
+            min-height: 100vh;
+
+            padding:
+                25px 30px 50px;
+        }
+
+        /* =========================
+           TOP BAR
+        ========================= */
+
+        .topbar {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 32px;
+        }
+
+        .search {
+            position: relative;
+
+            width: 260px;
+
+            height: 36px;
+        }
+
+        .search input {
+            width: 100%;
+            height: 100%;
+
+            padding:
+                0 15px 0 40px;
+
+            border:1px solid #dbe6e5;
+
+            border-radius: 7px;
+
+            outline: none;
+
+            background:#ffffff;
+
+            color:#173033;
+
+            font-size: 10px;
+        }
+
+        .search input::placeholder {
+            color:#9aa8a8;
+        }
+
+        .search-icon {
+            position: absolute;
+
+            left: 14px;
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            font-size: 12px;
+        }
+
+        .top-actions {
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .notification {
+            position: relative;
+
+            font-size: 15px;
+
+            cursor: pointer;
+        }
+
+        .notification-dot {
+            position: absolute;
+
+            width: 5px;
+            height: 5px;
+
+            background: #ff5370;
+
+            border-radius: 50%;
+
+            right: -2px;
+            top: -1px;
+        }
+
+        .avatar {
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background:#147b7d;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            box-shadow:0 0 20px rgba(20,123,125,.12);
+        }
+
+        /* =========================
+           PAGE TITLE
+        ========================= */
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            font-size: 25px;
+
+            margin-bottom: 7px;
+        }
+
+        .page-title h1 span {
+            color:#147b7d;
+        }
+
+        .page-title p {
+            color:#7a8989;
+
+            font-size: 10px;
+        }
+
+        /* =========================
+           PROFILE LAYOUT
+        ========================= */
+
+        .profile-layout {
+            display: grid;
+
+            grid-template-columns:
+                300px 1fr;
+
+            gap: 18px;
+
+            max-width: 1100px;
+        }
+
+        /* =========================
+           PROFILE CARD
+        ========================= */
+
+        .profile-card {
+            background:#ffffff;
+
+            border:1px solid #dbe6e5;
+
+            border-radius: 12px;
+
+            padding: 25px;
+
+            text-align: center;
+
+            height: fit-content;
+        }
+
+        .large-avatar {
+            width: 95px;
+            height: 95px;
+
+            margin: 5px auto 17px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:#147b7d;
+
+            font-size: 34px;
+
+            font-weight: 700;
+
+            box-shadow:0 0 30px rgba(20,123,125,.15);
+
+            border:2px solid rgba(20,123,125,.2);
+        }
+
+        .profile-card h2 {
+            font-size: 19px;
+
+            margin-bottom: 6px;
+        }
+
+        .profile-card .email {
+            color:#7a8989;
+
+            font-size: 10px;
+
+            margin-bottom: 18px;
+
+            word-break: break-word;
+        }
+
+        .account-badge {
+            display: inline-block;
+
+            padding: 6px 13px;
+
+            border-radius: 20px;
+
+            background:#edf7f7;
+
+            border:1px solid #b8dcd9;
+
+            color:#147b7d;
+
+            font-size: 9px;
+
+            font-weight: 600;
+        }
+
+        .profile-divider {
+            height: 1px;
+
+            background:#e5eeee;
+
+            margin: 22px 0;
+        }
+
+        .profile-mini {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 13px;
+
+            font-size: 9px;
+        }
+
+        .profile-mini span:first-child {
+            color:#7a8989;
+        }
+
+        .profile-mini span:last-child {
+            color:#354b4d;
+
+            font-weight: 600;
+
+            max-width: 150px;
+
+            text-align: right;
+
+            word-break: break-word;
+        }
+
+        /* =========================
+           DETAILS PANEL
+        ========================= */
+
+        .details-panel {
+            background:#ffffff;
+
+            border:1px solid #dbe6e5;
+
+            border-radius: 12px;
+
+            padding: 22px;
+        }
+
+        .details-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 22px;
+        }
+
+        .details-header h3 {
+            font-size: 14px;
+        }
+
+        .edit-btn {
+            border:
+                1px solid #9bc9c7;
+
+            background:
+                rgba(40, 101, 255, .07);
+
+            color: #5ba9ff;
+
+            border-radius: 7px;
+
+            padding: 8px 14px;
+
+            font-size: 9px;
+
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+        .edit-btn:hover {
+            background:
+                rgba(40, 101, 255, .15);
+
+            border-color:#147b7d;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .details-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 18px;
+        }
+
+        .detail-group label {
+            display: block;
+
+            color:#7a8989;
+
+            font-size: 9px;
+
+            margin-bottom: 7px;
+        }
+
+        .detail-box {
+            min-height: 43px;
+
+            padding: 12px 13px;
+
+            border:1px solid #dbe6e5;
+
+            border-radius: 8px;
+
+            background:#fbfdfd;
+
+            color:#354b4d;
+
+            font-size: 11px;
+
+            display: flex;
+
+            align-items: center;
+        }
+
+        /* =========================
+           SECURITY SECTION
+        ========================= */
+
+        .security {
+            margin-top: 25px;
+
+            padding-top: 22px;
+
+            border-top:
+                1px solid
+                #e5eeee;
+        }
+
+        .security h3 {
+            font-size: 13px;
+
+            margin-bottom: 15px;
+        }
+
+        .security-item {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 13px;
+
+            border:1px solid #dbe6e5;
+
+            border-radius: 8px;
+
+            background:#fbfdfd;
+
+            margin-bottom: 9px;
+        }
+
+        .security-left {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .security-icon {
+            width: 32px;
+            height: 32px;
+
+            border-radius: 7px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background:#edf7f7;
+
+            color:#147b7d;
+        }
+
+        .security-info h4 {
+            font-size: 10px;
+
+            margin-bottom: 3px;
+        }
+
+        .security-info p {
+            color:#7a8989;
+
+            font-size: 8px;
+        }
+
+        .change-btn {
+            border: none;
+
+            background: transparent;
+
+            color:#147b7d;
+
+            font-size: 9px;
+
+            cursor: pointer;
+        }
+
+        /* =========================
+           EDIT MODE
+        ========================= */
+
+        .edit-input {
+            width: 100%;
+
+            min-height: 43px;
+
+            padding: 10px 13px;
+
+            border:1px solid #147b7d;
+
+            border-radius: 8px;
+
+            background:#ffffff;
+
+            color:#173033;
+
+            outline: none;
+
+            font-size: 11px;
+        }
+
+        .save-btn {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 11px 22px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            color:#173033;
+
+            background:#147b7d;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .profile-layout {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .sidebar {
+                width: 65px;
+
+                padding: 20px 8px;
+            }
+
+            .sidebar-logo {
+                justify-content: center;
+
+                padding: 0;
+            }
+
+            .sidebar-logo img {
+                width: 35px;
+                height: 35px;
+            }
+
+            .sidebar-logo span,
+            .menu-title,
+            .menu a span:not(.menu-icon),
+            .logout span {
+                display: none;
+            }
+
+            .menu a {
+                justify-content: center;
+
+                padding: 0;
+            }
+
+            .logout a {
+                justify-content: center;
+            }
+
+            .main {
+                margin-left: 65px;
+
+                padding: 20px;
+            }
+
+            .search {
+                width: 190px;
+            }
+
+        }
+
+        @media (max-width: 550px) {
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search {
+                width: 140px;
+            }
+
+            .top-actions {
+                gap: 10px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="glow1"></div>
+    <div class="glow2"></div>
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================= -->
+
+    <aside class="sidebar">
+
+
+        <div class="sidebar-logo">
+
+            <img
+                src="logo.png"
+                alt="ExamPortal Logo">
+
+            <span>
+                Exam<span>Portal</span>
+            </span>
+
+        </div>
+
+
+        <div class="menu-title">
+            MAIN MENU
+        </div>
+
+
+        <nav class="menu">
+
+
+            <a href="dashboard.html">
+
+                <span class="menu-icon">
+                    ⌂
+                </span>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a href="exam.html">
+
+                <span class="menu-icon">
+                    ▣
+                </span>
+
+                <span>
+                    My Exams
+                </span>
+
+            </a>
+
+
+            <a href="result.html">
+
+                <span class="menu-icon">
+                    ◇
+                </span>
+
+                <span>
+                    Results
+                </span>
+
+            </a>
+
+
+            <a
+                href="profile.html"
+                class="active">
+
+                <span class="menu-icon">
+                    ◯
+                </span>
+
+                <span>
+                    Profile
+                </span>
+
+            </a>
+
+
+            <a href="notifications.html">
+
+                <span class="menu-icon">
+                    ♢
+                </span>
+
+                <span>
+                    Notifications
+                </span>
+
+            </a>
+
+
+            <a href="settings.html">
+
+                <span class="menu-icon">
+                    ⚙
+                </span>
+
+                <span>
+                    Settings
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="logout">
+
+            <a
+                href="#"
+                onclick="logoutUser()">
+
+                <span>
+                    ↪
+                </span>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="main">
+
+
+        <!-- TOP BAR -->
+
+        <div class="topbar">
+
+
+            <div class="search">
+
+                <span class="search-icon">
+                    🔍
+                </span>
+
+                <input
+                    type="text"
+                    placeholder="Search exams...">
+
+            </div>
+
+
+            <div class="top-actions">
+
+                <div class="notification">
+
+                    ♧
+
+                    <span
+                        class="notification-dot">
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="avatar"
+                    id="topAvatar">
+
+                    U
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             PAGE TITLE
+        ========================= -->
+
+        <div class="page-title">
+
+            <h1>
+                My <span>Profile</span>
+            </h1>
+
+            <p>
+                View and manage your ExamPortal account information.
+            </p>
+
+        </div>
+
+
+
+        <!-- =========================
+             PROFILE LAYOUT
+        ========================= -->
+
+        <div class="profile-layout">
+
+
+            <!-- =========================
+                 PROFILE SUMMARY
+            ========================= -->
+
+            <div class="profile-card">
+
+
+                <div
+                    class="large-avatar"
+                    id="largeAvatar">
+
+                    U
+
+                </div>
+
+
+                <h2 id="profileName">
+                    User
+                </h2>
+
+
+                <div
+                    class="email"
+                    id="profileEmail">
+
+                    user@example.com
+
+                </div>
+
+
+                <div
+                    class="account-badge"
+                    id="accountBadge">
+
+                    Student Account
+
+                </div>
+
+
+                <div class="profile-divider"></div>
+
+
+                <div class="profile-mini">
+
+                    <span>
+                        User ID
+                    </span>
+
+                    <span id="profileUserId">
+                        -
+                    </span>
+
+                </div>
+
+
+                <div class="profile-mini">
+
+                    <span>
+                        Account Type
+                    </span>
+
+                    <span id="profileType">
+                        Student
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="profile-mini"
+                    id="roleRow">
+
+                    <span>
+                        Role
+                    </span>
+
+                    <span id="profileRole">
+                        Student
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =========================
+                 DETAILS
+            ========================= -->
+
+            <div class="details-panel">
+
+
+                <div class="details-header">
+
+                    <h3>
+                        Personal Information
+                    </h3>
+
+
+                    <button
+                        class="edit-btn"
+                        id="editButton"
+                        onclick="editProfile()">
+
+                        ✎ Edit Profile
+
+                    </button>
+
+                </div>
+
+
+
+                <div class="details-grid">
+
+
+                    <!-- FULL NAME -->
+
+                    <div class="detail-group">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <div
+                            class="detail-box"
+                            id="nameBox">
+
+                            -
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="detail-group">
+
+                        <label>
+                            Email Address
+                        </label>
+
+                        <div
+                            class="detail-box"
+                            id="emailBox">
+
+                            -
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PHONE -->
+
+                    <div class="detail-group">
+
+                        <label>
+                            Phone Number
+                        </label>
+
+                        <div
+                            class="detail-box"
+                            id="phoneBox">
+
+                            -
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DEPARTMENT -->
+
+                    <div
+                        class="detail-group"
+                        id="departmentRow">
+
+                        <label>
+                            Department
+                        </label>
+
+                        <div
+                            class="detail-box"
+                            id="departmentBox">
+
+                            -
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- YEAR -->
+
+                    <div
+                        class="detail-group"
+                        id="yearRow">
+
+                        <label>
+                            Year
+                        </label>
+
+                        <div
+                            class="detail-box"
+                            id="yearBox">
+
+                            -
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ADMIN ROLE -->
+
+                    <div
+                        class="detail-group"
+                        id="adminRoleRow"
+                        style="display:none;">
+
+                        <label>
+                            Admin Role
+                        </label>
+
+                        <div
+                            class="detail-box"
+                            id="adminRoleBox">
+
+                            -
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- SAVE BUTTON -->
+
+                <button
+                    class="save-btn"
+                    id="saveButton"
+                    onclick="saveProfile()">
+
+                    Save Changes
+
+                </button>
+
+
+
+                <!-- =========================
+                     SECURITY
+                ========================= -->
+
+                <div class="security">
+
+
+                    <h3>
+                        Account & Security
+                    </h3>
+
+
+                    <div class="security-item">
+
+
+                        <div class="security-left">
+
+                            <div class="security-icon">
+                                🔒
+                            </div>
+
+
+                            <div class="security-info">
+
+                                <h4>
+                                    Password
+                                </h4>
+
+                                <p>
+                                    Your account password is protected.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="change-btn"
+                            onclick="changePassword()">
+
+                            Change
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="security-item">
+
+
+                        <div class="security-left">
+
+                            <div class="security-icon">
+                                🛡️
+                            </div>
+
+
+                            <div class="security-info">
+
+                                <h4>
+                                    Account Security
+                                </h4>
+
+                                <p>
+                                    Your account is protected by ExamPortal.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <span
+                            style="
+                            color:#147b7d;
+                            font-size:9px;
+                            font-weight:600;
+                            ">
+
+                            ● Active
+
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+
+        /* =========================================
+           GET LOGGED-IN USER
+        ========================================= */
+
+        let loggedInUser =
+            JSON.parse(
+                localStorage.getItem(
+                    "loggedInUser"
+                )
+            );
+
+
+        /* =========================================
+           CHECK LOGIN
+        ========================================= */
+
+        if (!loggedInUser) {
+
+            alert(
+                "Please login first."
+            );
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+        /* =========================================
+           DISPLAY PROFILE
+        ========================================= */
+
+        function loadProfile() {
+
+            if (!loggedInUser) {
+                return;
+            }
+
+
+            const name =
+                loggedInUser.fullName ||
+                "User";
+
+
+            const email =
+                loggedInUser.email ||
+                "-";
+
+
+            const phone =
+                loggedInUser.phone ||
+                "-";
+
+
+            const userId =
+                loggedInUser.userId ||
+                "-";
+
+
+            const accountType =
+                loggedInUser.accountType ||
+                "student";
+
+
+            /* NAME */
+
+            document.getElementById(
+                "profileName"
+            ).textContent = name;
+
+
+            document.getElementById(
+                "nameBox"
+            ).textContent = name;
+
+
+            /* EMAIL */
+
+            document.getElementById(
+                "profileEmail"
+            ).textContent = email;
+
+
+            document.getElementById(
+                "emailBox"
+            ).textContent = email;
+
+
+            /* PHONE */
+
+            document.getElementById(
+                "phoneBox"
+            ).textContent = phone;
+
+
+            /* USER ID */
+
+            document.getElementById(
+                "profileUserId"
+            ).textContent = userId;
+
+
+            /* AVATARS */
+
+            const firstLetter =
+                name
+                    .charAt(0)
+                    .toUpperCase();
+
+
+            document.getElementById(
+                "topAvatar"
+            ).textContent =
+                firstLetter;
+
+
+            document.getElementById(
+                "largeAvatar"
+            ).textContent =
+                firstLetter;
+
+
+            /* =========================
+               STUDENT
+            ========================= */
+
+            if (accountType === "student") {
+
+                document.getElementById(
+                    "accountBadge"
+                ).textContent =
+                    "Student Account";
+
+
+                document.getElementById(
+                    "profileType"
+                ).textContent =
+                    "Student";
+
+
+                document.getElementById(
+                    "roleRow"
+                ).style.display =
+                    "none";
+
+
+                document.getElementById(
+                    "departmentBox"
+                ).textContent =
+                    loggedInUser.department ||
+                    "-";
+
+
+                document.getElementById(
+                    "yearBox"
+                ).textContent =
+                    loggedInUser.year
+                    ? loggedInUser.year + " Year"
+                    : "-";
+
+            }
+
+
+            /* =========================
+               ADMIN
+            ========================= */
+
+            else {
+
+                document.getElementById(
+                    "accountBadge"
+                ).textContent =
+                    "Admin Account";
+
+
+                document.getElementById(
+                    "profileType"
+                ).textContent =
+                    "Administrator";
+
+
+                document.getElementById(
+                    "roleRow"
+                ).style.display =
+                    "flex";
+
+
+                document.getElementById(
+                    "profileRole"
+                ).textContent =
+                    loggedInUser.adminRole ||
+                    "Administrator";
+
+
+                document.getElementById(
+                    "departmentRow"
+                ).style.display =
+                    "none";
+
+
+                document.getElementById(
+                    "yearRow"
+                ).style.display =
+                    "none";
+
+
+                document.getElementById(
+                    "adminRoleRow"
+                ).style.display =
+                    "block";
+
+
+                document.getElementById(
+                    "adminRoleBox"
+                ).textContent =
+                    loggedInUser.adminRole ||
+                    "Administrator";
+
+            }
+
+        }
+
+
+        /* =========================================
+           EDIT PROFILE
+        ========================================= */
+
+        function editProfile() {
+
+            const nameBox =
+                document.getElementById(
+                    "nameBox"
+                );
+
+
+            const phoneBox =
+                document.getElementById(
+                    "phoneBox"
+                );
+
+
+            const editButton =
+                document.getElementById(
+                    "editButton"
+                );
+
+
+            const saveButton =
+                document.getElementById(
+                    "saveButton"
+                );
+
+
+            /* NAME INPUT */
+
+            nameBox.innerHTML =
+                `<input
+                    class="edit-input"
+                    id="editName"
+                    value="${loggedInUser.fullName || ""}"
+                >`;
+
+
+            /* PHONE INPUT */
+
+            phoneBox.innerHTML =
+                `<input
+                    class="edit-input"
+                    id="editPhone"
+                    value="${loggedInUser.phone || ""}"
+                >`;
+
+
+            editButton.style.display =
+                "none";
+
+
+            saveButton.style.display =
+                "inline-block";
+
+        }
+
+
+        /* =========================================
+           SAVE PROFILE
+        ========================================= */
+
+        function saveProfile() {
+
+            const newName =
+                document.getElementById(
+                    "editName"
+                ).value.trim();
+
+
+            const newPhone =
+                document.getElementById(
+                    "editPhone"
+                ).value.trim();
+
+
+            if (!newName) {
+
+                alert(
+                    "Please enter your name."
+                );
+
+                return;
+            }
+
+
+            if (
+                newPhone &&
+                !/^[0-9]{10}$/.test(newPhone)
+            ) {
+
+                alert(
+                    "Please enter a valid 10-digit phone number."
+                );
+
+                return;
+            }
+
+
+            /* UPDATE OBJECT */
+
+            loggedInUser.fullName =
+                newName;
+
+
+            loggedInUser.phone =
+                newPhone;
+
+
+            /* SAVE LOGGED USER */
+
+            localStorage.setItem(
+                "loggedInUser",
+                JSON.stringify(loggedInUser)
+            );
+
+
+            /* UPDATE REGISTERED ACCOUNT */
+
+            if (
+                loggedInUser.accountType ===
+                "admin"
+            ) {
+
+                localStorage.setItem(
+                    "registeredAdmin",
+                    JSON.stringify(loggedInUser)
+                );
+
+            }
+            else {
+
+                localStorage.setItem(
+                    "registeredStudent",
+                    JSON.stringify(loggedInUser)
+                );
+
+            }
+
+
+            alert(
+                "Profile updated successfully!"
+            );
+
+
+            location.reload();
+
+        }
+
+
+        /* =========================================
+           CHANGE PASSWORD
+        ========================================= */
+
+        function changePassword() {
+
+            const currentPassword =
+                prompt(
+                    "Enter your current password:"
+                );
+
+
+            if (
+                currentPassword === null
+            ) {
+                return;
+            }
+
+
+            if (
+                currentPassword !==
+                loggedInUser.password
+            ) {
+
+                alert(
+                    "Current password is incorrect."
+                );
+
+                return;
+            }
+
+
+            const newPassword =
+                prompt(
+                    "Enter your new password:"
+                );
+
+
+            if (
+                newPassword === null
+            ) {
+                return;
+            }
+
+
+            if (
+                newPassword.length < 6
+            ) {
+
+                alert(
+                    "New password must contain at least 6 characters."
+                );
+
+                return;
+            }
+
+
+            const confirmPassword =
+                prompt(
+                    "Confirm your new password:"
+                );
+
+
+            if (
+                newPassword !==
+                confirmPassword
+            ) {
+
+                alert(
+                    "Passwords do not match."
+                );
+
+                return;
+            }
+
+
+            /* UPDATE PASSWORD */
+
+            loggedInUser.password =
+                newPassword;
+
+
+            localStorage.setItem(
+                "loggedInUser",
+                JSON.stringify(loggedInUser)
+            );
+
+
+            if (
+                loggedInUser.accountType ===
+                "admin"
+            ) {
+
+                localStorage.setItem(
+                    "registeredAdmin",
+                    JSON.stringify(loggedInUser)
+                );
+
+            }
+            else {
+
+                localStorage.setItem(
+                    "registeredStudent",
+                    JSON.stringify(loggedInUser)
+                );
+
+            }
+
+
+            alert(
+                "Password changed successfully!"
+            );
+
+        }
+
+
+        /* =========================================
+           LOGOUT
+        ========================================= */
+
+        function logoutUser() {
+
+            localStorage.removeItem(
+                "loggedInUser"
+            );
+
+            localStorage.removeItem(
+                "userType"
+            );
+
+            window.location.href =
+                "index.html";
+
+        }
+
+
+        /* =========================================
+           LOAD PROFILE
+        ========================================= */
+
+        loadProfile();
+
+    </script>
+
+
+
+
+</body>
+
+</html>

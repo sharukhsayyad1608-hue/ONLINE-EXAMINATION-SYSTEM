@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ExamPortal | Dashboard</title>
+
+    <style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    background:#f5f8f8;
+    color:#173033;
+    overflow-x:hidden;
+}
+
+/* =========================
+   LIGHT LOGIN THEME
+========================= */
+
+body::before,
+.glow1,
+.glow2{
+    display:none;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:220px;
+
+    background:#ffffff;
+    border-right:1px solid #e1e9e8;
+
+    padding:24px 16px;
+    z-index:100;
+
+    box-shadow:8px 0 30px rgba(23,48,51,.035);
+}
+
+.sidebar-logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:0 8px;
+    margin-bottom:42px;
+}
+
+.sidebar-logo img{
+    width:36px;
+    height:36px;
+    object-fit:contain;
+    border-radius:8px;
+}
+
+.sidebar-logo span{
+    font-size:18px;
+    font-weight:800;
+    color:#173033;
+}
+
+.sidebar-logo span span{
+    color:#147b7d;
+}
+
+.menu-title{
+    color:#8a9999;
+    font-size:9px;
+    letter-spacing:1.5px;
+    margin:0 10px 11px;
+    font-weight:700;
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.menu a{
+    height:42px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:0 13px;
+    border-radius:9px;
+
+    color:#718080;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:500;
+
+    transition:.25s;
+}
+
+.menu a:hover{
+    color:#147b7d;
+    background:#edf7f7;
+}
+
+.menu a.active{
+    color:#ffffff;
+    background:#147b7d;
+
+    box-shadow:
+        0 8px 20px rgba(20,123,125,.18);
+}
+
+.menu-icon{
+    width:17px;
+    text-align:center;
+    font-size:13px;
+}
+
+.logout{
+    position:absolute;
+    bottom:25px;
+    left:16px;
+    right:16px;
+}
+
+.logout a{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px;
+    color:#d65b64;
+    text-decoration:none;
+    font-size:11px;
+    cursor:pointer;
+    border-radius:8px;
+    transition:.2s;
+}
+
+.logout a:hover{
+    background:#fff2f3;
+    color:#c64550;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    margin-left:220px;
+    min-height:100vh;
+    padding:30px 34px 55px;
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:32px;
+}
+
+.search{
+    position:relative;
+    width:280px;
+    height:40px;
+}
+
+.search input{
+    width:100%;
+    height:100%;
+    padding:0 15px 0 40px;
+
+    border:1px solid #d8e3e2;
+    border-radius:9px;
+    outline:none;
+
+    background:#ffffff;
+    color:#233738;
+    font-size:11px;
+
+    transition:.25s;
+}
+
+.search input::placeholder{
+    color:#9aa8a8;
+}
+
+.search input:focus{
+    border-color:#147b7d;
+    box-shadow:0 0 0 3px rgba(20,123,125,.08);
+}
+
+.search-icon{
+    position:absolute;
+    left:14px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:12px;
+    color:#7c8b8b;
+}
+
+.top-actions{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.notification{
+    position:relative;
+    width:30px;
+    height:30px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:16px;
+    cursor:pointer;
+    color:#657575;
+    border-radius:8px;
+    transition:.25s;
+}
+
+.notification:hover{
+    color:#147b7d;
+    background:#edf7f7;
+}
+
+.notification-dot{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:#ef5967;
+    border-radius:50%;
+    right:2px;
+    top:2px;
+}
+
+.avatar{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:#e7f4f3;
+    color:#147b7d;
+
+    border:1px solid #cfe3e1;
+
+    font-size:12px;
+    font-weight:800;
+}
+
+/* =========================
+   WELCOME
+========================= */
+
+.welcome{
+    margin-bottom:26px;
+}
+
+.welcome h1{
+    font-size:27px;
+    margin-bottom:8px;
+    color:#172c2d;
+    letter-spacing:-.5px;
+}
+
+.welcome-name{
+    color:#147b7d;
+}
+
+.welcome p{
+    color:#7a8989;
+    font-size:11px;
+}
+
+/* =========================
+   STATISTICS
+========================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-bottom:20px;
+}
+
+.stat-card{
+    min-height:112px;
+    padding:20px;
+
+    background:#ffffff;
+    border:1px solid #dfe8e7;
+    border-radius:12px;
+
+    box-shadow:0 8px 25px rgba(25,55,55,.045);
+    transition:.25s;
+}
+
+.stat-card:hover{
+    border-color:#a7cecd;
+    transform:translateY(-2px);
+    box-shadow:0 13px 30px rgba(25,55,55,.07);
+}
+
+.stat-icon{
+    font-size:14px;
+    margin-bottom:14px;
+    color:#147b7d;
+}
+
+.stat-number{
+    font-size:22px;
+    font-weight:800;
+    margin-bottom:4px;
+    color:#173033;
+}
+
+.stat-label{
+    color:#839090;
+    font-size:9px;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.content-grid{
+    display:grid;
+    grid-template-columns:1.6fr 1fr;
+    gap:18px;
+}
+
+.panel{
+    background:#ffffff;
+    border:1px solid #dfe8e7;
+    border-radius:13px;
+    padding:20px;
+
+    box-shadow:0 9px 28px rgba(25,55,55,.045);
+}
+
+.panel-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.panel-title h2{
+    font-size:14px;
+    color:#203536;
+}
+
+.view-all{
+    color:#147b7d;
+    font-size:9px;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.view-all:hover{
+    color:#0e5f61;
+}
+
+/* =========================
+   EXAM CARD
+========================= */
+
+.exam-card{
+    border:1px solid #d4e4e3;
+    border-radius:11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef8f7,
+            #ffffff
+        );
+
+    padding:18px;
+    margin-bottom:17px;
+}
+
+.exam-top{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:17px;
+}
+
+.exam-logo{
+    width:43px;
+    height:43px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:10px;
+
+    background:#dff2f1;
+    color:#147b7d;
+
+    font-size:18px;
+}
+
+.exam-name{
+    font-size:13px;
+    font-weight:800;
+    color:#1d3233;
+    margin-bottom:4px;
+}
+
+.exam-sub{
+    color:#849191;
+    font-size:9px;
+}
+
+.exam-info{
+    display:flex;
+    gap:18px;
+    color:#718080;
+    font-size:9px;
+    margin-bottom:15px;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.start-btn{
+    display:inline-block;
+    padding:10px 17px;
+    border-radius:8px;
+
+    background:#147b7d;
+    color:white;
+
+    text-decoration:none;
+    font-size:9px;
+    font-weight:700;
+
+    box-shadow:0 7px 18px rgba(20,123,125,.16);
+    transition:.25s;
+}
+
+.start-btn:hover{
+    background:#10686a;
+    transform:translateY(-1px);
+    box-shadow:0 10px 23px rgba(20,123,125,.22);
+}
+
+/* =========================
+   QUICK ACTIONS
+========================= */
+
+.quick-actions{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.quick-action{
+    min-height:88px;
+
+    border:1px solid #dfe8e7;
+    border-radius:9px;
+    padding:14px;
+
+    text-decoration:none;
+    color:#203536;
+
+    background:#ffffff;
+    transition:.25s;
+}
+
+.quick-action:hover{
+    border-color:#a7cecd;
+    background:#f7fbfb;
+    transform:translateY(-2px);
+}
+
+.quick-icon{
+    font-size:15px;
+    margin-bottom:10px;
+    color:#147b7d;
+}
+
+.quick-action h4{
+    font-size:10px;
+    margin-bottom:4px;
+}
+
+.quick-action p{
+    color:#899696;
+    font-size:8px;
+}
+
+/* =========================
+   RESULTS
+========================= */
+
+.result-list{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+}
+
+.result-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:11px;
+
+    border:1px solid #e0e8e7;
+    border-radius:8px;
+
+    background:#fbfcfc;
+}
+
+.result-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.result-icon{
+    width:29px;
+    height:29px;
+
+    border-radius:7px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#e7f4f3;
+    color:#147b7d;
+
+    font-size:11px;
+}
+
+.result-name{
+    font-size:10px;
+    font-weight:700;
+    color:#2a3d3e;
+    margin-bottom:3px;
+}
+
+.result-questions{
+    color:#929e9e;
+    font-size:8px;
+}
+
+.score{
+    font-size:11px;
+    font-weight:800;
+}
+
+.score.green{
+    color:#168b77;
+}
+
+.score.yellow{
+    color:#c99622;
+}
+
+.score.red{
+    color:#d65b64;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1000px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .content-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:700px){
+
+    .sidebar{
+        width:66px;
+        padding:20px 8px;
+    }
+
+    .sidebar-logo{
+        justify-content:center;
+        padding:0;
+    }
+
+    .sidebar-logo img{
+        width:35px;
+        height:35px;
+    }
+
+    .sidebar-logo span,
+    .menu-title,
+    .menu a span:not(.menu-icon),
+    .logout span{
+        display:none;
+    }
+
+    .menu a{
+        justify-content:center;
+        padding:0;
+    }
+
+    .logout a{
+        justify-content:center;
+    }
+
+    .main{
+        margin-left:66px;
+        padding:20px;
+    }
+
+    .search{
+        width:190px;
+    }
+
+    .quick-actions{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:500px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .search{
+        width:145px;
+    }
+
+    .welcome h1{
+        font-size:22px;
+    }
+
+    .exam-info{
+        flex-direction:column;
+        gap:6px;
+    }
+
+    .panel{
+        padding:15px;
+    }
+}
+
+    
+/* =========================================================
+   EXAMPORTAL - GLOBAL SIDEBAR FONT SIZE FIX
+   Keep sidebar typography identical on every page.
+   ========================================================= */
+
+.sidebar,
+.sidebar *,
+.menu,
+.menu * {
+    font-family: "Segoe UI", Arial, sans-serif !important;
+}
+
+/* Main navigation links */
+.sidebar .menu a,
+.menu a,
+.sidebar > a,
+.sidebar a:not(.logo):not(.sidebar-logo) {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    line-height: 1.2 !important;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    transform: none !important;
+    scale: 1 !important;
+    box-sizing: border-box !important;
+}
+
+/* Active item must have exactly the same font size */
+.sidebar .menu a.active,
+.menu a.active,
+.sidebar > a.active,
+.sidebar a.active {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    line-height: 1.2 !important;
+    transform: none !important;
+    scale: 1 !important;
+}
+
+/* Hover must not increase text size */
+.sidebar .menu a:hover,
+.menu a:hover,
+.sidebar > a:hover,
+.sidebar a:hover {
+    font-size: 13px !important;
+    transform: none !important;
+    scale: 1 !important;
+}
+
+/* Navigation icons */
+.sidebar .menu-icon,
+.menu .menu-icon,
+.sidebar a i,
+.sidebar a svg {
+    font-size: 13px !important;
+    transform: none !important;
+    scale: 1 !important;
+    flex-shrink: 0;
+}
+
+/* Navigation text spans */
+.sidebar .menu a span:not(.menu-icon),
+.menu a span:not(.menu-icon) {
+    font-size: 13px !important;
+    line-height: 1.2 !important;
+    transform: none !important;
+    scale: 1 !important;
+}
+
+/* Logout text stays consistent */
+.sidebar .logout a,
+.sidebar .logout,
+.sidebar .logout span {
+    font-size: 13px !important;
+    line-height: 1.2 !important;
+    transform: none !important;
+    scale: 1 !important;
+}
+
+/* Never zoom sidebar when clicking Exam / Result */
+.sidebar a:active,
+.menu a:active {
+    font-size: 13px !important;
+    transform: none !important;
+    scale: 1 !important;
+}
+
+</style>
+</head>
+
+
+<body>
+
+    <div class="glow1"></div>
+    <div class="glow2"></div>
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================= -->
+
+    <aside class="sidebar">
+
+        <!-- LOGO -->
+
+        <div class="sidebar-logo">
+
+            <img
+                src="logo.png"
+                alt="ExamPortal Logo">
+
+            <span>
+                Exam<span>Portal</span>
+            </span>
+
+        </div>
+
+
+        <div class="menu-title">
+            MAIN MENU
+        </div>
+
+
+        <!-- =========================
+             NAVIGATION
+        ========================= -->
+
+        <nav class="menu">
+
+
+            <!-- DASHBOARD -->
+
+            <a
+                href="dashboard.html"
+                class="active">
+
+                <span class="menu-icon">
+                    ⌂
+                </span>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <!-- MY EXAMS -->
+
+            <a href="exam.html">
+
+                <span class="menu-icon">
+                    ▣
+                </span>
+
+                <span>
+                    My Exams
+                </span>
+
+            </a>
+
+
+            <!-- RESULTS -->
+
+            <a href="result.html">
+
+                <span class="menu-icon">
+                    ◇
+                </span>
+
+                <span>
+                    Results
+                </span>
+
+            </a>
+
+
+            <!-- PROFILE -->
+
+            <a href="profile.html">
+
+                <span class="menu-icon">
+                    ◯
+                </span>
+
+                <span>
+                    Profile
+                </span>
+
+            </a>
+
+
+            <!-- NOTIFICATIONS -->
+
+            <a
+                href="notifications.html">
+
+                <span class="menu-icon">
+                    ♢
+                </span>
+
+                <span>
+                    Notifications
+                </span>
+
+            </a>
+
+
+            <!-- SETTINGS -->
+
+            <a
+                href="settings.html">
+
+                <span class="menu-icon">
+                    ⚙
+                </span>
+
+                <span>
+                    Settings
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <div class="logout">
+
+            <a
+                href="index.html"
+                onclick="return confirmLogout()">
+
+                <span>
+                    ↪
+                </span>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="main">
+
+
+        <!-- TOP BAR -->
+
+        <div class="topbar">
+
+
+            <div class="search">
+
+                <span class="search-icon">
+                    🔍
+                </span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search exams...">
+
+            </div>
+
+
+            <div class="top-actions">
+
+
+                <!-- NOTIFICATION ICON -->
+
+                <div
+                    class="notification"
+                    onclick="goToNotifications()">
+
+                    🔔
+
+                    <span
+                        class="notification-dot">
+                    </span>
+
+                </div>
+
+
+                <!-- USER AVATAR -->
+
+                <div
+                    class="avatar"
+                    id="userAvatar">
+
+                    U
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             WELCOME
+        ========================= -->
+
+        <section class="welcome">
+
+            <h1>
+
+                Good Evening,
+
+                <span
+                    class="welcome-name"
+                    id="welcomeName">
+
+                    User
+
+                </span>
+
+                👋
+
+            </h1>
+
+
+            <p>
+                Ready for your next challenge?
+                Keep learning, keep testing, keep achieving.
+            </p>
+
+        </section>
+
+
+
+        <!-- =========================
+             STATISTICS
+        ========================= -->
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ▣
+                </div>
+
+                <div class="stat-number" id="totalExams">
+                    0
+                </div>
+
+                <div class="stat-label">
+                    Total Exams
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ✓
+                </div>
+
+                <div class="stat-number" id="completedExams">
+                    0
+                </div>
+
+                <div class="stat-label">
+                    Completed
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ◇
+                </div>
+
+                <div class="stat-number" id="averageScore">
+                    0%
+                </div>
+
+                <div class="stat-label">
+                    Average Score
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ♛
+                </div>
+
+                <div class="stat-number" id="certificates">
+                    0
+                </div>
+
+                <div class="stat-label">
+                    Certificates
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             CONTENT GRID
+        ========================= -->
+
+        <section class="content-grid">
+
+
+            <!-- LEFT -->
+
+            <div class="panel">
+
+
+                <div class="panel-title">
+
+                    <h2>
+                        Upcoming Exam
+                    </h2>
+
+                    <a
+                        href="exam.html"
+                        class="view-all">
+
+                        View All →
+
+                    </a>
+
+                </div>
+
+
+                <!-- EXAM -->
+
+                <div class="exam-card">
+
+
+                    <div class="exam-top">
+
+
+                        <div class="exam-logo">
+                            ☕
+                        </div>
+
+
+                        <div>
+
+                            <div class="exam-name" id="upcomingExamName">
+                                Java Programming
+                            </div>
+
+                            <div class="exam-sub" id="upcomingExamSub">
+                                Programming Fundamentals
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="exam-info">
+
+                        <span id="upcomingQuestions">
+                            ▣ 10 Questions
+                        </span>
+
+                        <span id="upcomingTime">
+                            ◷ 10 Minutes
+                        </span>
+
+                        <span>
+                            ★ 50 Marks
+                        </span>
+
+                    </div>
+
+
+                    <a
+                        href="exam.html"
+                        class="start-btn">
+
+                        Start Exam →
+
+                    </a>
+
+                </div>
+
+
+
+                <!-- QUICK ACTIONS -->
+
+                <div class="quick-actions">
+
+
+                    <a
+                        href="exam.html"
+                        class="quick-action">
+
+                        <div class="quick-icon">
+                            ▣
+                        </div>
+
+                        <h4>
+                            Browse Exams
+                        </h4>
+
+                        <p>
+                            Find available exams
+                        </p>
+
+                    </a>
+
+
+                    <a
+                        href="result.html"
+                        class="quick-action">
+
+                        <div class="quick-icon">
+                            ◇
+                        </div>
+
+                        <h4>
+                            View Results
+                        </h4>
+
+                        <p>
+                            Check your performance
+                        </p>
+
+                    </a>
+
+
+                    <a
+                        href="profile.html"
+                        class="quick-action">
+
+                        <div class="quick-icon">
+                            ◯
+                        </div>
+
+                        <h4>
+                            My Profile
+                        </h4>
+
+                        <p>
+                            Manage your account
+                        </p>
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RIGHT -->
+
+            <div class="panel">
+
+
+                <div class="panel-title">
+
+                    <h2>
+                        Recent Results
+                    </h2>
+
+                    <a
+                        href="result.html"
+                        class="view-all">
+
+                        View All →
+
+                    </a>
+
+                </div>
+
+
+                <div class="result-list" id="recentResults">
+
+                    </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+
+        /* ==================================
+           GET LOGGED-IN USER
+        ================================== */
+
+        let loggedInUser = null;
+
+        try {
+
+            loggedInUser =
+                JSON.parse(
+                    localStorage.getItem(
+                        "loggedInUser"
+                    )
+                );
+
+        } catch (error) {
+
+            loggedInUser = null;
+
+        }
+
+
+        /* ==================================
+           DISPLAY USER
+        ================================== */
+
+        function loadUser() {
+
+            if (!loggedInUser) {
+
+                document.getElementById(
+                    "welcomeName"
+                ).textContent = "User";
+
+                document.getElementById(
+                    "userAvatar"
+                ).textContent = "U";
+
+                return;
+            }
+
+
+            const name =
+                loggedInUser.fullName ||
+                loggedInUser.name ||
+                "User";
+
+
+            document.getElementById(
+                "welcomeName"
+            ).textContent = name;
+
+
+            document.getElementById(
+                "userAvatar"
+            ).textContent =
+                name
+                    .charAt(0)
+                    .toUpperCase();
+
+        }
+
+
+        /* ==================================
+           DYNAMIC EXAM DATA
+        ================================== */
+
+        const availableExams = [
+            { subject: "Java", name: "Java Programming", sub: "Programming Fundamentals", questions: 10, minutes: 10 },
+            { subject: "Python", name: "Python Programming", sub: "Python Fundamentals", questions: 10, minutes: 10 },
+            { subject: "C", name: "C Programming", sub: "C Fundamentals", questions: 10, minutes: 10 },
+            { subject: "JavaScript", name: "JavaScript", sub: "Web Scripting Fundamentals", questions: 10, minutes: 10 },
+            { subject: "C++", name: "C++ Programming", sub: "Object-Oriented Programming", questions: 10, minutes: 10 }
+        ];
+
+        /* ==================================
+           EXAM HISTORY
+        ================================== */
+
+        function getExamHistory() {
+
+            try {
+
+                const results =
+                    JSON.parse(
+                        localStorage.getItem("examResults")
+                    ) || [];
+
+                return Array.isArray(results)
+                    ? results
+                    : [];
+
+            } catch (error) {
+
+                return [];
+
+            }
+
+        }
+
+
+        /* ==================================
+           DASHBOARD STATISTICS
+        ================================== */
+
+        function loadDashboardStats() {
+
+            const history =
+                getExamHistory();
+
+            const completed =
+                history.length;
+
+            const average =
+                completed
+                    ? Math.round(
+                        history.reduce(
+                            function(sum, result) {
+
+                                const total =
+                                    Number(
+                                        result.totalQuestions
+                                    ) || 0;
+
+                                const correct =
+                                    Number(
+                                        result.correct
+                                    ) || 0;
+
+                                const percentage =
+                                    total > 0
+                                        ? (correct / total) * 100
+                                        : 0;
+
+                                return sum + percentage;
+
+                            },
+                            0
+                        ) / completed
+                    )
+                    : 0;
+
+            const certificates =
+                history.filter(
+                    function(result) {
+
+                        const total =
+                            Number(
+                                result.totalQuestions
+                            ) || 0;
+
+                        const correct =
+                            Number(
+                                result.correct
+                            ) || 0;
+
+                        return (
+                            total > 0 &&
+                            (correct / total) * 100 >= 50
+                        );
+
+                    }
+                ).length;
+
+
+            document.getElementById(
+                "totalExams"
+            ).textContent =
+                availableExams.length;
+
+            document.getElementById(
+                "completedExams"
+            ).textContent =
+                completed;
+
+            document.getElementById(
+                "averageScore"
+            ).textContent =
+                average + "%";
+
+            document.getElementById(
+                "certificates"
+            ).textContent =
+                certificates;
+
+        }
+
+
+        /* ==================================
+           UPCOMING EXAM
+        ================================== */
+
+        function loadUpcomingExam() {
+
+            const history =
+                getExamHistory();
+
+            const completedSubjects =
+                new Set(
+                    history.map(
+                        function(result) {
+                            return result.subject;
+                        }
+                    )
+                );
+
+            const next =
+                availableExams.find(
+                    function(exam) {
+                        return !completedSubjects.has(
+                            exam.subject
+                        );
+                    }
+                ) || availableExams[0];
+
+
+            document.getElementById(
+                "upcomingExamName"
+            ).textContent =
+                next.name;
+
+            document.getElementById(
+                "upcomingExamSub"
+            ).textContent =
+                next.sub;
+
+            document.getElementById(
+                "upcomingQuestions"
+            ).textContent =
+                "▣ " +
+                next.questions +
+                " Questions";
+
+            document.getElementById(
+                "upcomingTime"
+            ).textContent =
+                "◷ " +
+                next.minutes +
+                " Minutes";
+
+        }
+
+
+        /* ==================================
+           RECENT RESULTS
+        ================================== */
+
+        function loadRecentResults() {
+
+            const container =
+                document.getElementById(
+                    "recentResults"
+                );
+
+            const history =
+                getExamHistory()
+                    .slice()
+                    .reverse()
+                    .slice(0, 4);
+
+
+            if (!history.length) {
+
+                container.innerHTML =
+                    '<div style="padding:20px;text-align:center;color:#8290ae;">No exams completed yet.</div>';
+
+                return;
+
+            }
+
+
+            container.innerHTML =
+                history.map(
+                    function(result) {
+
+                        const total =
+                            Number(
+                                result.totalQuestions
+                            ) || 0;
+
+                        const correct =
+                            Number(
+                                result.correct
+                            ) || 0;
+
+                        const percentage =
+                            total > 0
+                                ? Math.round(
+                                    (correct / total) * 100
+                                )
+                                : 0;
+
+                        const scoreClass =
+                            percentage >= 80
+                                ? "green"
+                                : (
+                                    percentage >= 50
+                                        ? "yellow"
+                                        : "red"
+                                );
+
+
+                        return `
+                            <div class="result-item">
+
+                                <div class="result-left">
+
+                                    <div class="result-icon">
+                                        ▣
+                                    </div>
+
+                                    <div>
+
+                                        <div class="result-name">
+                                            ${result.subject || "Exam"}
+                                        </div>
+
+                                        <div class="result-questions">
+                                            ${correct} / ${total} Correct
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="score ${scoreClass}">
+                                    ${percentage}%
+                                </div>
+
+                            </div>
+                        `;
+
+                    }
+                ).join("");
+
+        }
+
+
+        /* ==================================
+           LOAD DASHBOARD DATA
+        ================================== */
+
+        loadDashboardStats();
+
+        loadUpcomingExam();
+
+        loadRecentResults();
+
+
+        /* ==================================
+           NOTIFICATIONS
+        ================================== */
+
+        function goToNotifications() {
+
+            window.location.href =
+                "notifications.html";
+
+        }
+
+
+        /* ==================================
+           LOGOUT
+        ================================== */
+
+        function confirmLogout() {
+
+            const answer =
+                confirm(
+                    "Are you sure you want to logout?"
+                );
+
+
+            if (answer) {
+
+                localStorage.removeItem(
+                    "loggedInUser"
+                );
+
+                localStorage.removeItem(
+                    "userType"
+                );
+
+                return true;
+
+            }
+
+
+            return false;
+
+        }
+
+
+        /* ==================================
+           SEARCH EXAMS
+        ================================== */
+
+        document
+            .getElementById("searchInput")
+            .addEventListener(
+                "keyup",
+                function () {
+
+                    const searchText =
+                        this.value
+                            .toLowerCase()
+                            .trim();
+
+
+                    const examCard =
+                        document.querySelector(
+                            ".exam-card"
+                        );
+
+
+                    const examName =
+                        document.querySelector(
+                            ".exam-name"
+                        );
+
+
+                    if (!examCard || !examName) {
+                        return;
+                    }
+
+
+                    if (
+                        examName.textContent
+                            .toLowerCase()
+                            .includes(searchText)
+                    ) {
+
+                        examCard.style.display =
+                            "block";
+
+                    } else {
+
+                        examCard.style.display =
+                            "none";
+
+                    }
+
+                }
+            );
+
+
+        /* ==================================
+           LOAD USER
+        ================================== */
+
+        loadUser();
+
+    </script>
+
+</body>
+
+</html>

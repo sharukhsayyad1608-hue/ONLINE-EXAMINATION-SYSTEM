@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Results | ExamPortal</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    overflow-y:scroll;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f5f8f8;
+    color:#173033;
+    min-width:1100px;
+}
+
+/* BACKGROUND */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background-image:
+        linear-gradient(rgba(20,123,125,.055) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(20,123,125,.055) 1px,transparent 1px);
+
+    background-size:48px 48px;
+
+    pointer-events:none;
+    z-index:-1;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+
+    width:212px;
+    height:100vh;
+
+    background:#ffffff;
+
+    border-right:1px solid #e1e9e8;
+
+    padding:25px 16px;
+
+    z-index:100;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+
+    font-size:19px;
+
+    margin-bottom:55px;
+}
+
+.logo img{
+    width:32px;
+    height:32px;
+
+    object-fit:contain;
+}
+
+.logo b{
+    color:#173033;
+}
+
+.logo span{
+    color:#147b7d;
+}
+
+.menu-title{
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    color:#99a6a6;
+
+    margin:0 0 14px 10px;
+}
+
+.sidebar a{
+    display:flex;
+    align-items:center;
+
+    gap:15px;
+
+    width:100%;
+    height:46px;
+
+    padding:0 18px;
+
+    margin:7px 0;
+
+    border-radius:9px;
+
+    color:#718080;
+
+    text-decoration:none;
+
+    font-size:13px;
+
+    white-space:nowrap;
+}
+
+.sidebar a:hover{
+    color:#173033;
+
+    background:#edf7f7;
+}
+
+.sidebar a.active{
+    color:#173033;
+
+    background:#147b7d;
+
+    box-shadow:0 8px 22px rgba(20,123,125,.18);
+}
+
+.sidebar .logout{
+    position:absolute;
+
+    left:16px;
+    right:16px;
+
+    bottom:25px;
+
+    color:#d65b64;
+}
+
+/* MAIN */
+
+.main{
+    margin-left:212px;
+
+    width:calc(100% - 212px);
+
+    min-height:100vh;
+
+    padding:28px 32px 50px;
+
+    position:relative;
+}
+
+/* TOPBAR */
+
+.topbar{
+    width:100%;
+
+    height:45px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:40px;
+}
+
+.search{
+    width:280px;
+
+    height:40px;
+
+    border:1px solid #dbe6e5;
+
+    border-radius:8px;
+
+    background:#ffffff;
+
+    color:#173033;
+
+    padding:0 15px;
+
+    outline:none;
+}
+
+.search::placeholder{
+    color:#9aa8a8;
+}
+
+.profile{
+    width:38px;
+    height:38px;
+
+    border-radius:50%;
+
+    background:#e7f4f3;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-weight:bold;
+}
+
+/* HEADING */
+
+.heading{
+    width:100%;
+
+    max-width:1180px;
+
+    margin:0 auto 25px;
+}
+
+.heading h1{
+    font-size:32px;
+
+    margin:0 0 10px;
+}
+
+.heading h1 span{
+    color:#147b7d;
+}
+
+.heading p{
+    color:#7a8989;
+
+    font-size:13px;
+
+    margin:0;
+}
+
+/* RESULT BOX */
+
+.result-box{
+    width:100%;
+
+    max-width:1180px;
+
+    margin:0 auto;
+
+    padding:38px 45px;
+
+    border:1px solid #dbe6e5;
+
+    border-radius:22px;
+
+    background:#ffffff;
+
+    text-align:center;
+}
+
+/* SCORE */
+
+.score-circle{
+    width:175px;
+    height:175px;
+
+    margin:0 auto 25px;
+
+    border-radius:50%;
+
+    border:7px solid #147b7d;
+
+    box-shadow:0 0 0 1px #9bc9c7,0 0 35px rgba(20,123,125,.15);
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+.score{
+    font-size:45px;
+
+    font-weight:bold;
+
+    color:#147b7d;
+}
+
+.score-label{
+    color:#7d8c8c;
+
+    margin-top:5px;
+}
+
+/* MESSAGE */
+
+.result-message{
+    color:#147b7d;
+
+    font-size:27px;
+
+    margin:10px 0 7px;
+}
+
+.result-sub{
+    color:#7a8989;
+
+    margin:0 0 28px;
+}
+
+/* SUBJECT */
+
+.subject{
+    padding:20px;
+
+    border:1px solid #dbe6e5;
+
+    border-radius:15px;
+
+    background:#f0f9f8;
+
+    margin-bottom:20px;
+}
+
+.subject-title{
+    color:#7a8989;
+
+    font-size:12px;
+
+    text-transform:uppercase;
+}
+
+.subject-name{
+    color:#147b7d;
+
+    font-size:23px;
+
+    font-weight:bold;
+
+    margin-top:8px;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:15px;
+}
+
+.stat{
+    padding:20px;
+
+    border:1px solid #dbe6e5;
+
+    border-radius:13px;
+
+    background:#ffffff;
+}
+
+.stat h3{
+    margin:0;
+
+    font-size:25px;
+}
+
+.stat p{
+    margin:8px 0 0;
+
+    color:#7a8989;
+
+    font-size:11px;
+}
+
+/* BUTTON */
+
+.back-btn{
+    display:inline-block;
+
+    margin-top:25px;
+
+    padding:13px 25px;
+
+    border-radius:8px;
+
+    text-decoration:none;
+
+    color:#173033;
+
+    background:#147b7d;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1150px){
+
+    body{
+        min-width:0;
+    }
+
+    .sidebar{
+        width:180px;
+    }
+
+    .main{
+        margin-left:180px;
+
+        width:calc(100% - 180px);
+    }
+
+    .stats{
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+    }
+}
+
+@media(max-width:750px){
+
+    body{
+        min-width:0;
+    }
+
+    .sidebar{
+        width:70px;
+
+        padding:20px 8px;
+    }
+
+    .logo b,
+    .menu-title,
+    .sidebar a span{
+        display:none;
+    }
+
+    .sidebar a{
+        justify-content:center;
+
+        padding:0;
+    }
+
+    .sidebar .logout{
+        left:8px;
+        right:8px;
+    }
+
+    .main{
+        margin-left:70px;
+
+        width:calc(100% - 70px);
+
+        padding:25px 18px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .heading h1{
+        font-size:28px;
+    }
+}
+
+
+/* =========================================================
+   EXAMPORTAL - GLOBAL SIDEBAR FONT SIZE FIX
+   Keep sidebar typography identical on every page.
+   ========================================================= */
+
+.sidebar,
+.sidebar *,
+.menu,
+.menu * {
+    font-family: "Segoe UI", Arial, sans-serif !important;
+}
+
+/* Main navigation links */
+.sidebar .menu a,
+.menu a,
+.sidebar > a,
+.sidebar a:not(.logo):not(.sidebar-logo) {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    line-height: 1.2 !important;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    transform: none !important;
+    scale: 1 !important;
+    box-sizing: border-box !important;
+}
+
+/* Active item must have exactly the same font size */
+.sidebar .menu a.active,
+.menu a.active,
+.sidebar > a.active,
+.sidebar a.active {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    line-height: 1.2 !important;
+    transform: none !important;
+    scale: 1 !important;
+}
+
+/* Hover must not increase text size */
+.sidebar .menu a:hover,
+.menu a:hover,
+.sidebar > a:hover,
+.sidebar a:hover {
+    font-size: 13px !important;
+    transform: none !important;
+    scale: 1 !important;
+}
+
+/* Navigation icons */
+.sidebar .menu-icon,
+.menu .menu-icon,
+.sidebar a i,
+.sidebar a svg {
+    font-size: 13px !important;
+    transform: none !important;
+    scale: 1 !important;
+    flex-shrink: 0;
+}
+
+/* Navigation text spans */
+.sidebar .menu a span:not(.menu-icon),
+.menu a span:not(.menu-icon) {
+    font-size: 13px !important;
+    line-height: 1.2 !important;
+    transform: none !important;
+    scale: 1 !important;
+}
+
+/* Logout text stays consistent */
+.sidebar .logout a,
+.sidebar .logout,
+.sidebar .logout span {
+    font-size: 13px !important;
+    line-height: 1.2 !important;
+    transform: none !important;
+    scale: 1 !important;
+}
+
+/* Never zoom sidebar when clicking Exam / Result */
+.sidebar a:active,
+.menu a:active {
+    font-size: 13px !important;
+    transform: none !important;
+    scale: 1 !important;
+}
+
+
+/* =========================
+   RESULT HISTORY
+========================= */
+
+.section-label{
+    color:#147b7d;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    margin-bottom:18px;
+}
+
+.history-box{
+    width:100%;
+    max-width:1180px;
+    margin:25px auto 0;
+    padding:28px 30px;
+    border:1px solid #dbe6e5;
+    border-radius:20px;
+    background:#ffffff;
+    box-shadow:0 8px 25px rgba(25,55,55,.045);
+}
+
+.history-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.history-header h2{
+    margin:0 0 5px;
+    color:#173033;
+    font-size:22px;
+}
+
+.history-header p{
+    margin:0;
+    color:#7a8989;
+    font-size:12px;
+}
+
+.history-count{
+    padding:8px 13px;
+    border-radius:20px;
+    background:#eaf6f5;
+    color:#147b7d;
+    font-size:11px;
+    font-weight:700;
+    white-space:nowrap;
+}
+
+.results-history{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.history-item{
+    display:grid;
+    grid-template-columns:52px minmax(180px,1fr) 110px 110px 100px;
+    align-items:center;
+    gap:18px;
+    padding:16px 18px;
+    border:1px solid #e1e9e8;
+    border-radius:13px;
+    background:#fbfdfd;
+    transition:.2s;
+}
+
+.history-item:hover{
+    border-color:#b9d9d7;
+    background:#f6fbfb;
+}
+
+.history-number{
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#eaf6f5;
+    color:#147b7d;
+    font-size:13px;
+    font-weight:700;
+}
+
+.history-subject{
+    color:#173033;
+    font-size:14px;
+    font-weight:700;
+}
+
+.history-date{
+    margin-top:4px;
+    color:#8a9898;
+    font-size:10px;
+}
+
+.history-score{
+    font-size:18px;
+    font-weight:800;
+    color:#147b7d;
+}
+
+.history-marks{
+    color:#526b6c;
+    font-size:12px;
+}
+
+.history-result{
+    text-align:right;
+}
+
+.history-badge{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:700;
+}
+
+.history-badge.good{
+    background:#e8f7f0;
+    color:#18845f;
+}
+
+.history-badge.average{
+    background:#fff5df;
+    color:#a56d00;
+}
+
+.history-badge.low{
+    background:#fff0f1;
+    color:#d4555d;
+}
+
+.history-empty{
+    padding:35px 15px;
+    text-align:center;
+    color:#7a8989;
+    border:1px dashed #dbe6e5;
+    border-radius:12px;
+    background:#fbfdfd;
+}
+
+@media(max-width:900px){
+    .history-item{
+        grid-template-columns:45px 1fr 90px;
+    }
+
+    .history-marks{
+        display:none;
+    }
+
+    .history-result{
+        text-align:right;
+    }
+}
+
+@media(max-width:600px){
+    .history-box{
+        padding:20px 15px;
+    }
+
+    .history-item{
+        grid-template-columns:40px 1fr 75px;
+        gap:10px;
+        padding:13px;
+    }
+
+    .history-score{
+        font-size:16px;
+    }
+
+    .history-badge{
+        font-size:9px;
+        padding:5px 7px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <img
+            src="logo.png"
+            alt="ExamPortal"
+        >
+
+        <b>
+            Exam<span>Portal</span>
+        </b>
+
+    </div>
+
+
+    <p class="menu-title">
+        MAIN MENU
+    </p>
+
+
+    <a href="dashboard.html">
+        ⌂
+        <span>Dashboard</span>
+    </a>
+
+
+    <a href="exam.html">
+        ▣
+        <span>My Exams</span>
+    </a>
+
+
+    <a href="result.html" class="active">
+        ◇
+        <span>Results</span>
+    </a>
+
+
+    <a href="profile.html">
+        ◯
+        <span>Profile</span>
+    </a>
+
+
+    <a href="notifications.html">
+        ♢
+        <span>Notifications</span>
+    </a>
+
+
+    <a href="settings.html">
+        ⚙
+        <span>Settings</span>
+    </a>
+
+
+    <a href="login.html" class="logout">
+        ↪
+        <span>Logout</span>
+    </a>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+
+    <div class="topbar">
+
+        <input
+            class="search"
+            type="text"
+            placeholder="🔍  Search results..."
+        >
+
+        <div class="profile" id="profileInitial">
+            P
+        </div>
+
+    </div>
+
+
+    <div class="heading">
+
+        <h1>
+            My <span>Results</span>
+        </h1>
+
+        <p>
+            View your examination performance and scores.
+        </p>
+
+    </div>
+
+
+    <!-- LATEST RESULT -->
+    <section class="result-box">
+
+        <div class="section-label">
+            LATEST RESULT
+        </div>
+
+        <div class="score-circle">
+            <div class="score" id="score">0%</div>
+            <div class="score-label">Score</div>
+        </div>
+
+        <h2 class="result-message" id="resultMessage">
+            No exam completed yet
+        </h2>
+
+        <p class="result-sub" id="resultSub">
+            Complete an exam to see your latest performance here.
+        </p>
+
+        <div class="subject">
+            <div class="subject-title">Subject</div>
+            <div class="subject-name" id="subject">—</div>
+        </div>
+
+        <div class="stats">
+
+            <div class="stat">
+                <h3 id="correct">0</h3>
+                <p>Correct Answers</p>
+            </div>
+
+            <div class="stat">
+                <h3 id="wrong">0</h3>
+                <p>Wrong Answers</p>
+            </div>
+
+            <div class="stat">
+                <h3 id="total">0</h3>
+                <p>Total Questions</p>
+            </div>
+
+            <div class="stat">
+                <h3 id="percentage">0%</h3>
+                <p>Percentage</p>
+            </div>
+
+        </div>
+
+        <a href="exam.html" class="back-btn">
+            TAKE ANOTHER EXAM →
+        </a>
+
+    </section>
+
+
+    <!-- LAST 5 TEST RESULTS -->
+    <section class="history-box">
+
+        <div class="history-header">
+
+            <div>
+                <h2>Test History</h2>
+                <p>Last 5 completed examinations</p>
+            </div>
+
+            <span class="history-count" id="historyCount">
+                0 Tests
+            </span>
+
+        </div>
+
+        <div id="resultsHistory" class="results-history">
+            <div class="history-empty">
+                No completed tests yet.
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+
+<script>
+
+/* =====================================
+   RESULT DATA
+===================================== */
+
+function getResults(){
+
+    try{
+
+        const data =
+            JSON.parse(
+                localStorage.getItem("examResults")
+            ) || [];
+
+        return Array.isArray(data)
+            ? data
+            : [];
+
+    }catch(error){
+
+        return [];
+
+    }
+
+}
+
+
+/* =====================================
+   NORMALIZE RESULT
+===================================== */
+
+function normalizeResult(result){
+
+    const total =
+        Number(
+            result.totalQuestions ??
+            result.total ??
+            0
+        );
+
+    const correct =
+        Number(
+            result.correct ??
+            0
+        );
+
+    const wrong =
+        Math.max(
+            total - correct,
+            0
+        );
+
+    const percentage =
+        total > 0
+            ? Math.round(
+                (correct / total) * 100
+            )
+            : 0;
+
+    const marks =
+        Number(
+            result.marks ??
+            correct * 2
+        );
+
+    const totalMarks =
+        Number(
+            result.totalMarks ??
+            total * 2
+        );
+
+    return {
+
+        subject:
+            result.subject ||
+            "Unknown Exam",
+
+        correct:
+            correct,
+
+        wrong:
+            wrong,
+
+        total:
+            total,
+
+        percentage:
+            percentage,
+
+        marks:
+            marks,
+
+        totalMarks:
+            totalMarks,
+
+        date:
+            result.date ||
+            "Date not available"
+
+    };
+
+}
+
+
+/* =====================================
+   SHOW LATEST RESULT
+===================================== */
+
+function loadLatestResult(){
+
+    const results =
+        getResults();
+
+    let latest = null;
+
+
+    if(results.length){
+
+        latest =
+            normalizeResult(
+                results[results.length - 1]
+            );
+
+    }else{
+
+        /* Backward compatibility */
+
+        try{
+
+            const oldResult =
+                JSON.parse(
+                    localStorage.getItem(
+                        "examResult"
+                    )
+                );
+
+            if(oldResult){
+
+                latest =
+                    normalizeResult(
+                        oldResult
+                    );
+
+            }
+
+        }catch(error){}
+
+    }
+
+
+    if(!latest){
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "score"
+    ).textContent =
+        latest.percentage + "%";
+
+
+    document.getElementById(
+        "percentage"
+    ).textContent =
+        latest.percentage + "%";
+
+
+    document.getElementById(
+        "subject"
+    ).textContent =
+        latest.subject;
+
+
+    document.getElementById(
+        "correct"
+    ).textContent =
+        latest.correct;
+
+
+    document.getElementById(
+        "wrong"
+    ).textContent =
+        latest.wrong;
+
+
+    document.getElementById(
+        "total"
+    ).textContent =
+        latest.total;
+
+
+    let message =
+        "Keep Practicing!";
+
+    if(latest.percentage >= 80){
+
+        message =
+            "Excellent Work!";
+
+    }
+    else if(latest.percentage >= 50){
+
+        message =
+            "Good Job!";
+
+    }
+
+
+    document.getElementById(
+        "resultMessage"
+    ).textContent =
+        message;
+
+
+    document.getElementById(
+        "resultSub"
+    ).textContent =
+        latest.correct +
+        " out of " +
+        latest.total +
+        " questions correct • " +
+        latest.marks +
+        " / " +
+        latest.totalMarks +
+        " marks";
+
+}
+
+
+/* =====================================
+   SHOW LAST 5 RESULTS
+===================================== */
+
+function loadHistory(){
+
+    const results =
+        getResults();
+
+    const container =
+        document.getElementById(
+            "resultsHistory"
+        );
+
+    const count =
+        document.getElementById(
+            "historyCount"
+        );
+
+
+    if(!results.length){
+
+        count.textContent =
+            "0 Tests";
+
+        container.innerHTML =
+            '<div class="history-empty">No completed tests yet.</div>';
+
+        return;
+
+    }
+
+
+    const latestFive =
+        results
+            .slice()
+            .reverse()
+            .slice(0,5);
+
+
+    count.textContent =
+        latestFive.length +
+        (latestFive.length === 1
+            ? " Test"
+            : " Tests");
+
+
+    container.innerHTML =
+        latestFive.map(
+            function(rawResult,index){
+
+                const result =
+                    normalizeResult(
+                        rawResult
+                    );
+
+
+                let badgeClass =
+                    "low";
+
+                let badgeText =
+                    "Needs Practice";
+
+                if(result.percentage >= 80){
+
+                    badgeClass =
+                        "good";
+
+                    badgeText =
+                        "Excellent";
+
+                }
+                else if(result.percentage >= 50){
+
+                    badgeClass =
+                        "average";
+
+                    badgeText =
+                        "Good";
+
+                }
+
+
+                return `
+
+                    <div class="history-item">
+
+                        <div class="history-number">
+                            ${index + 1}
+                        </div>
+
+                        <div>
+
+                            <div class="history-subject">
+                                ${result.subject}
+                            </div>
+
+                            <div class="history-date">
+                                ${result.date}
+                            </div>
+
+                        </div>
+
+                        <div class="history-score">
+                            ${result.percentage}%
+                        </div>
+
+                        <div class="history-marks">
+                            ${result.marks} / ${result.totalMarks} Marks
+                        </div>
+
+                        <div class="history-result">
+
+                            <span class="history-badge ${badgeClass}">
+                                ${badgeText}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =====================================
+   SEARCH
+===================================== */
+
+const searchBox =
+    document.querySelector(
+        ".search"
+    );
+
+if(searchBox){
+
+    searchBox.addEventListener(
+        "input",
+        function(){
+
+            const search =
+                this.value
+                    .trim()
+                    .toLowerCase();
+
+            document
+                .querySelectorAll(
+                    ".history-item"
+                )
+                .forEach(
+                    function(item){
+
+                        item.style.display =
+                            item.textContent
+                                .toLowerCase()
+                                .includes(search)
+                                ? ""
+                                : "none";
+
+                    }
+                );
+
+        }
+    );
+
+}
+
+
+/* =====================================
+   USER AVATAR
+===================================== */
+
+try{
+
+    const loggedInUser =
+        JSON.parse(
+            localStorage.getItem(
+                "loggedInUser"
+            )
+        );
+
+    const name =
+        loggedInUser?.fullName ||
+        loggedInUser?.name ||
+        "";
+
+    if(name){
+
+        document.getElementById(
+            "profileInitial"
+        ).textContent =
+            name.charAt(0).toUpperCase();
+
+    }
+
+}catch(error){}
+
+
+/* =====================================
+   LOAD PAGE
+===================================== */
+
+loadLatestResult();
+
+loadHistory();
+
+</script>
+
+</body>
+</html>

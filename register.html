@@ -1,0 +1,1798 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExamPortal | Register</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #102a2b;
+        background:
+            radial-gradient(
+                circle at 8% 35%,
+                rgba(18, 107, 109, 0.10),
+                transparent 28%
+            ),
+            radial-gradient(
+                circle at 90% 80%,
+                rgba(18, 107, 109, 0.06),
+                transparent 30%
+            ),
+            #f6f8f8;
+        min-height: 100vh;
+    }
+
+    /* ================= HEADER ================= */
+
+    header {
+        height: 88px;
+        background: rgba(255, 255, 255, 0.97);
+        border-bottom: 1px solid #e2e8e8;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: 0 7%;
+    }
+
+    .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        text-decoration: none;
+    }
+
+    .logo-section img {
+        width: 44px;
+        height: 44px;
+        object-fit: contain;
+    }
+
+    .logo-text {
+        font-size: 27px;
+        font-weight: 800;
+        color: #102a2b;
+        letter-spacing: -0.8px;
+    }
+
+    .logo-text span {
+        color: #087c80;
+    }
+
+    .back-home {
+        text-decoration: none;
+        color: #526667;
+        font-size: 14px;
+        font-weight: 500;
+        transition: 0.25s;
+    }
+
+    .back-home:hover {
+        color: #087c80;
+    }
+
+    /* ================= MAIN ================= */
+
+    .main-container {
+        width: 86%;
+        max-width: 1250px;
+        margin: 0 auto;
+
+        min-height: calc(100vh - 88px);
+
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+
+        gap: 80px;
+        align-items: center;
+
+        padding: 60px 0 70px;
+    }
+
+    /* ================= LEFT CONTENT ================= */
+
+    .intro {
+        padding-left: 10px;
+    }
+
+    .small-title {
+        display: inline-block;
+
+        color: #087c80;
+
+        font-size: 13px;
+        font-weight: 800;
+
+        letter-spacing: 1.8px;
+
+        margin-bottom: 24px;
+    }
+
+    .intro h1 {
+        font-size: clamp(46px, 5vw, 68px);
+
+        line-height: 1.02;
+
+        letter-spacing: -2.8px;
+
+        color: #102526;
+
+        margin-bottom: 25px;
+    }
+
+    .intro h1 span {
+        color: #167476;
+    }
+
+    .intro p {
+        max-width: 590px;
+
+        color: #617172;
+
+        font-size: 17px;
+
+        line-height: 1.8;
+
+        margin-bottom: 36px;
+    }
+
+    .feature-row {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+    }
+
+    .feature-box {
+        width: 72px;
+        height: 72px;
+
+        border-radius: 14px;
+
+        border: 1px solid #d7e2e2;
+
+        background: #ffffff;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 25px;
+
+        color: #087c80;
+
+        box-shadow:
+            0 10px 30px rgba(24, 54, 55, 0.06);
+
+        transition: 0.25s;
+    }
+
+    .feature-box:hover {
+        transform: translateY(-4px);
+
+        box-shadow:
+            0 15px 35px rgba(24, 54, 55, 0.11);
+
+        border-color: #9cc8c9;
+    }
+
+    /* ================= REGISTER CARD ================= */
+
+    .register-card {
+        background: #ffffff;
+
+        border: 1px solid #e1e7e7;
+
+        border-radius: 22px;
+
+        padding: 38px 40px;
+
+        box-shadow:
+            0 25px 60px rgba(28, 52, 53, 0.09),
+            0 5px 20px rgba(28, 52, 53, 0.04);
+    }
+
+    .card-heading {
+        text-align: center;
+
+        margin-bottom: 28px;
+    }
+
+    .card-heading h2 {
+        color: #142829;
+
+        font-size: 31px;
+
+        margin-bottom: 8px;
+    }
+
+    .card-heading p {
+        color: #7a898a;
+
+        font-size: 14px;
+    }
+
+    /* ================= LABEL ================= */
+
+    .field-label {
+        display: block;
+
+        color: #435657;
+
+        font-size: 13px;
+
+        font-weight: 600;
+
+        margin-bottom: 9px;
+    }
+
+    /* ================= ACCOUNT TYPE ================= */
+
+    .account-label {
+        margin-bottom: 10px;
+    }
+
+    .account-types {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 12px;
+
+        margin-bottom: 22px;
+    }
+
+    .account-option {
+        position: relative;
+    }
+
+    .account-option input {
+        position: absolute;
+
+        opacity: 0;
+
+        pointer-events: none;
+    }
+
+    .account-option label {
+        height: 53px;
+
+        border: 1px solid #d8e1e1;
+
+        border-radius: 10px;
+
+        background: #fafcfc;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 8px;
+
+        cursor: pointer;
+
+        color: #657576;
+
+        font-size: 15px;
+
+        font-weight: 600;
+
+        transition: 0.25s;
+    }
+
+    .account-option input:checked + label {
+        border-color: #087c80;
+
+        background: #eef8f8;
+
+        color: #087c80;
+
+        box-shadow:
+            inset 0 0 0 1px rgba(8, 124, 128, 0.08);
+    }
+
+    .account-option label:hover {
+        border-color: #8ebabb;
+    }
+
+    /* ================= FORM ================= */
+
+    .form-grid {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 17px 14px;
+    }
+
+    .form-group {
+        min-width: 0;
+    }
+
+    input,
+    select {
+        width: 100%;
+
+        height: 48px;
+
+        border: 1px solid #d6e0e0;
+
+        border-radius: 9px;
+
+        padding: 0 14px;
+
+        background: #fbfcfc;
+
+        color: #243738;
+
+        font-size: 14px;
+
+        outline: none;
+
+        transition: 0.25s;
+    }
+
+    input::placeholder {
+        color: #9aa8a8;
+    }
+
+    select {
+        cursor: pointer;
+
+        color: #667777;
+    }
+
+    input:focus,
+    select:focus {
+        border-color: #087c80;
+
+        background: #ffffff;
+
+        box-shadow:
+            0 0 0 3px rgba(8, 124, 128, 0.08);
+    }
+
+    /* ================= ADMIN ROLE ================= */
+
+    /*
+        IMPORTANT:
+        Admin Role is now a normal 50% width field.
+        It will appear beside Phone Number.
+    */
+
+    #adminRoleGroup {
+        display: none;
+    }
+
+    /* ================= TERMS ================= */
+
+    .terms {
+        display: flex;
+
+        align-items: flex-start;
+
+        gap: 9px;
+
+        margin-top: 21px;
+
+        margin-bottom: 20px;
+    }
+
+    .terms input {
+        width: 16px;
+
+        height: 16px;
+
+        margin-top: 2px;
+
+        accent-color: #087c80;
+
+        cursor: pointer;
+    }
+
+    .terms label {
+        font-size: 12px;
+
+        line-height: 1.5;
+
+        color: #788788;
+
+        cursor: pointer;
+    }
+
+    .terms a {
+        color: #087c80;
+
+        text-decoration: none;
+
+        font-weight: 600;
+    }
+
+    .terms a:hover {
+        text-decoration: underline;
+    }
+
+    /* ================= BUTTON ================= */
+
+    #registerButton {
+        width: 100%;
+
+        height: 51px;
+
+        border: none;
+
+        border-radius: 9px;
+
+        background: #126b6d;
+
+        color: white;
+
+        font-size: 14px;
+
+        font-weight: 700;
+
+        cursor: pointer;
+
+        transition: 0.25s;
+
+        box-shadow:
+            0 10px 22px rgba(18, 107, 109, 0.16);
+    }
+
+    #registerButton:hover {
+        background: #0d5c5e;
+
+        transform: translateY(-1px);
+
+        box-shadow:
+            0 13px 27px rgba(18, 107, 109, 0.22);
+    }
+
+    #registerButton:active {
+        transform: translateY(0);
+    }
+
+    /* ================= LOGIN ================= */
+
+    .login-link {
+        text-align: center;
+
+        margin-top: 20px;
+
+        font-size: 13px;
+
+        color: #7a898a;
+    }
+
+    .login-link a {
+        color: #087c80;
+
+        font-weight: 700;
+
+        text-decoration: none;
+    }
+
+    .login-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* ================= MESSAGE ================= */
+
+    #message {
+        display: none;
+
+        margin-top: 15px;
+
+        padding: 11px 13px;
+
+        border-radius: 8px;
+
+        font-size: 13px;
+
+        text-align: center;
+    }
+
+    /* ================= RESPONSIVE ================= */
+
+    @media (max-width: 1000px) {
+
+        .main-container {
+            grid-template-columns: 1fr;
+
+            gap: 45px;
+
+            max-width: 720px;
+        }
+
+        .intro {
+            text-align: center;
+
+            padding-left: 0;
+        }
+
+        .intro p {
+            margin-left: auto;
+
+            margin-right: auto;
+        }
+
+        .feature-row {
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 650px) {
+
+        header {
+            height: 75px;
+
+            padding: 0 5%;
+        }
+
+        .logo-text {
+            font-size: 22px;
+        }
+
+        .logo-section img {
+            width: 38px;
+
+            height: 38px;
+        }
+
+        .back-home {
+            font-size: 12px;
+        }
+
+        .main-container {
+            width: 92%;
+
+            padding: 40px 0;
+        }
+
+        .intro h1 {
+            font-size: 45px;
+
+            letter-spacing: -2px;
+        }
+
+        .intro p {
+            font-size: 15px;
+        }
+
+        .register-card {
+            padding: 28px 20px;
+
+            border-radius: 17px;
+        }
+
+        .card-heading h2 {
+            font-size: 27px;
+        }
+
+        .form-grid {
+            grid-template-columns: 1fr;
+
+            gap: 15px;
+        }
+
+        .account-types {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    @media (max-width: 420px) {
+
+        .back-home {
+            display: none;
+        }
+
+        .intro h1 {
+            font-size: 39px;
+        }
+
+        .account-types {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* =========================================================
+       100% ZOOM / FULL VIEWPORT LAYOUT
+       Keeps the complete registration page visible on desktop.
+    ========================================================= */
+
+    html,
+    body {
+        width: 100%;
+        min-height: 100%;
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    header {
+        height: 72px;
+        padding: 0 7%;
+    }
+
+    .logo-section {
+        gap: 12px;
+    }
+
+    .logo-section img {
+        width: 38px;
+        height: 38px;
+    }
+
+    .logo-text {
+        font-size: 24px;
+    }
+
+    .back-home {
+        font-size: 13px;
+    }
+
+    .main-container {
+        width: 88%;
+        max-width: 1240px;
+        min-height: calc(100vh - 72px);
+        gap: 55px;
+        padding: 22px 0 28px;
+        align-items: center;
+    }
+
+    .intro {
+        padding-left: 0;
+    }
+
+    .small-title {
+        font-size: 11px;
+        letter-spacing: 1.6px;
+        margin-bottom: 15px;
+    }
+
+    .intro h1 {
+        font-size: clamp(42px, 4vw, 56px);
+        line-height: 1.03;
+        letter-spacing: -2.2px;
+        margin-bottom: 16px;
+    }
+
+    .intro p {
+        max-width: 540px;
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 24px;
+    }
+
+    .feature-row {
+        gap: 14px;
+    }
+
+    .feature-box {
+        width: 58px;
+        height: 58px;
+        border-radius: 12px;
+        font-size: 21px;
+    }
+
+    .register-card {
+        width: 100%;
+        padding: 24px 28px;
+        border-radius: 18px;
+    }
+
+    .card-heading {
+        margin-bottom: 17px;
+    }
+
+    .card-heading h2 {
+        font-size: 27px;
+        margin-bottom: 5px;
+    }
+
+    .card-heading p {
+        font-size: 12px;
+    }
+
+    .field-label {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    .account-label {
+        margin-bottom: 7px;
+    }
+
+    .account-types {
+        gap: 10px;
+        margin-bottom: 14px;
+    }
+
+    .account-option label {
+        height: 45px;
+        border-radius: 9px;
+        font-size: 13px;
+    }
+
+    .form-grid {
+        gap: 10px 12px;
+    }
+
+    input,
+    select {
+        height: 42px;
+        border-radius: 8px;
+        padding: 0 12px;
+        font-size: 13px;
+    }
+
+    .admin-role {
+        margin-top: 0;
+    }
+
+    .terms {
+        gap: 7px;
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+
+    .terms input {
+        width: 15px;
+        height: 15px;
+    }
+
+    .terms label {
+        font-size: 11px;
+        line-height: 1.35;
+    }
+
+    #registerButton {
+        height: 45px;
+        border-radius: 8px;
+        font-size: 13px;
+    }
+
+    .login-link {
+        margin-top: 12px;
+        font-size: 12px;
+    }
+
+    #message {
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+
+    @media (max-width: 1000px) {
+        .main-container {
+            grid-template-columns: 1fr;
+            width: 90%;
+            max-width: 700px;
+            padding: 30px 0 40px;
+        }
+
+        .intro {
+            text-align: center;
+        }
+
+        .intro p {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feature-row {
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 650px) {
+        header {
+            height: 64px;
+            padding: 0 5%;
+        }
+
+        .logo-section img {
+            width: 34px;
+            height: 34px;
+        }
+
+        .logo-text {
+            font-size: 21px;
+        }
+
+        .main-container {
+            width: 92%;
+            padding: 22px 0 30px;
+        }
+
+        .intro h1 {
+            font-size: 40px;
+        }
+
+        .register-card {
+            padding: 22px 18px;
+        }
+
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <a
+        href="index.html"
+        class="logo-section"
+    >
+
+        <img
+            src="logo.png"
+            alt="ExamPortal Logo"
+        >
+
+        <div class="logo-text">
+            Exam<span>Portal</span>
+        </div>
+
+    </a>
+
+
+    <a
+        href="index.html"
+        class="back-home"
+    >
+        ← Back to Home
+    </a>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main-container">
+
+
+    <!-- ================= LEFT SIDE ================= -->
+
+    <section class="intro">
+
+        <div class="small-title">
+            EXAMPORTAL REGISTRATION
+        </div>
+
+
+        <h1>
+            Create Your<br>
+            <span>Exam Profile.</span>
+        </h1>
+
+
+        <p>
+            Join ExamPortal and begin your examination journey.
+            Create your profile, take online exams, and track
+            your performance from one place.
+        </p>
+
+
+        <div class="feature-row">
+
+            <div class="feature-box">
+                ✦
+            </div>
+
+            <div class="feature-box">
+                ✓
+            </div>
+
+            <div class="feature-box">
+                🎓
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= REGISTER CARD ================= -->
+
+    <section class="register-card">
+
+
+        <div class="card-heading">
+
+            <h2>
+                Create Account
+            </h2>
+
+            <p>
+                Enter your details to create your account
+            </p>
+
+        </div>
+
+
+        <!-- ================= ACCOUNT TYPE ================= -->
+
+        <label class="field-label account-label">
+            Account Type
+        </label>
+
+
+        <div class="account-types">
+
+
+            <div class="account-option">
+
+                <input
+                    type="radio"
+                    id="studentAccount"
+                    name="accountType"
+                    value="student"
+                    checked
+                    onchange="changeAccountType()"
+                >
+
+                <label for="studentAccount">
+                    🎓 Student
+                </label>
+
+            </div>
+
+
+            <div class="account-option">
+
+                <input
+                    type="radio"
+                    id="adminAccount"
+                    name="accountType"
+                    value="admin"
+                    onchange="changeAccountType()"
+                >
+
+                <label for="adminAccount">
+                    🛡️ Admin
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= FORM ================= -->
+
+        <form
+            id="registerForm"
+            onsubmit="registerUser(event)"
+        >
+
+            <div class="form-grid">
+
+
+                <!-- FULL NAME -->
+
+                <div class="form-group">
+
+                    <label
+                        class="field-label"
+                        for="fullName"
+                    >
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label
+                        class="field-label"
+                        for="email"
+                    >
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label
+                        class="field-label"
+                        for="phone"
+                    >
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="Enter 10-digit phone"
+                        maxlength="10"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- ================= ADMIN ROLE ================= -->
+
+                <div
+                    class="form-group"
+                    id="adminRoleGroup"
+                >
+
+                    <label
+                        class="field-label"
+                        for="adminRole"
+                    >
+                        Admin Role
+                    </label>
+
+                    <select id="adminRole">
+
+                        <option value="">
+                            Select admin role
+                        </option>
+
+                        <option value="Super Admin">
+                            Super Admin
+                        </option>
+
+                        <option value="College Admin">
+                            College Admin
+                        </option>
+
+                        <option value="Exam Admin">
+                            Exam Admin
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ================= DEPARTMENT ================= -->
+
+                <div
+                    class="form-group"
+                    id="departmentGroup"
+                >
+
+                    <label
+                        class="field-label"
+                        for="department"
+                    >
+                        Department
+                    </label>
+
+                    <select id="department">
+
+                        <option value="">
+                            Select department
+                        </option>
+
+                        <option value="CSE">
+                            Computer Science & Engineering
+                        </option>
+
+                        <option value="IT">
+                            Information Technology
+                        </option>
+
+                        <option value="AIML">
+                            Artificial Intelligence & ML
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ================= YEAR ================= -->
+
+                <div
+                    class="form-group"
+                    id="yearGroup"
+                >
+
+                    <label
+                        class="field-label"
+                        for="year"
+                    >
+                        Year
+                    </label>
+
+                    <select id="year">
+
+                        <option value="">
+                            Select year
+                        </option>
+
+                        <option value="1st Year">
+                            1st Year
+                        </option>
+
+                        <option value="2nd Year">
+                            2nd Year
+                        </option>
+
+                        <option value="3rd Year">
+                            3rd Year
+                        </option>
+
+                        <option value="4th Year">
+                            4th Year
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ================= PASSWORD ================= -->
+
+                <div class="form-group">
+
+                    <label
+                        class="field-label"
+                        for="password"
+                    >
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Create password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- ================= CONFIRM PASSWORD ================= -->
+
+                <div class="form-group">
+
+                    <label
+                        class="field-label"
+                        for="confirmPassword"
+                    >
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm password"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= TERMS ================= -->
+
+            <div class="terms">
+
+                <input
+                    type="checkbox"
+                    id="terms"
+                    required
+                >
+
+                <label for="terms">
+
+                    I agree to the
+
+                    <a
+                        href="#"
+                        onclick="return false;"
+                    >
+                        Terms & Conditions
+                    </a>
+
+                    and
+
+                    <a
+                        href="#"
+                        onclick="return false;"
+                    >
+                        Privacy Policy
+                    </a>
+
+                    of ExamPortal.
+
+                </label>
+
+            </div>
+
+
+            <!-- ================= BUTTON ================= -->
+
+            <button
+                type="submit"
+                id="registerButton"
+            >
+                Create Student Account →
+            </button>
+
+
+            <!-- ================= MESSAGE ================= -->
+
+            <div id="message"></div>
+
+        </form>
+
+
+        <!-- ================= LOGIN ================= -->
+
+        <div class="login-link">
+
+            Already have an account?
+
+            <a href="login.html">
+                Login here
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    /* =========================================
+       ACCOUNT TYPE
+    ========================================= */
+
+    function changeAccountType() {
+
+        const student =
+            document.getElementById(
+                "studentAccount"
+            ).checked;
+
+
+        const departmentGroup =
+            document.getElementById(
+                "departmentGroup"
+            );
+
+
+        const yearGroup =
+            document.getElementById(
+                "yearGroup"
+            );
+
+
+        const adminRoleGroup =
+            document.getElementById(
+                "adminRoleGroup"
+            );
+
+
+        const registerButton =
+            document.getElementById(
+                "registerButton"
+            );
+
+
+        const department =
+            document.getElementById(
+                "department"
+            );
+
+
+        const year =
+            document.getElementById(
+                "year"
+            );
+
+
+        const adminRole =
+            document.getElementById(
+                "adminRole"
+            );
+
+
+        if (student) {
+
+            departmentGroup.style.display =
+                "block";
+
+            yearGroup.style.display =
+                "block";
+
+            adminRoleGroup.style.display =
+                "none";
+
+
+            department.required = true;
+
+            year.required = true;
+
+            adminRole.required = false;
+
+
+            registerButton.textContent =
+                "Create Student Account →";
+
+        }
+
+        else {
+
+            departmentGroup.style.display =
+                "none";
+
+            yearGroup.style.display =
+                "none";
+
+            adminRoleGroup.style.display =
+                "block";
+
+
+            department.required = false;
+
+            year.required = false;
+
+            adminRole.required = true;
+
+
+            registerButton.textContent =
+                "Create Admin Account →";
+        }
+    }
+
+
+    /* =========================================
+       GENERATE STUDENT ID
+    ========================================= */
+
+    function generateStudentId() {
+
+        let studentNumber =
+            parseInt(
+                localStorage.getItem(
+                    "studentNumber"
+                ) || "0"
+            );
+
+
+        studentNumber++;
+
+
+        localStorage.setItem(
+            "studentNumber",
+            studentNumber
+        );
+
+
+        return "STU" +
+            String(studentNumber)
+                .padStart(3, "0");
+    }
+
+
+    /* =========================================
+       GENERATE ADMIN ID
+    ========================================= */
+
+    function generateAdminId() {
+
+        let adminNumber =
+            parseInt(
+                localStorage.getItem(
+                    "adminNumber"
+                ) || "0"
+            );
+
+
+        adminNumber++;
+
+
+        return "ADM" +
+            String(adminNumber)
+                .padStart(3, "0");
+    }
+
+
+    /* =========================================
+       MESSAGE
+    ========================================= */
+
+    function showMessage(
+        text,
+        success
+    ) {
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+
+        message.textContent = text;
+
+        message.style.display =
+            "block";
+
+
+        if (success) {
+
+            message.style.background =
+                "#eaf8f0";
+
+            message.style.color =
+                "#16804c";
+
+            message.style.border =
+                "1px solid #bfe6ce";
+
+        }
+
+        else {
+
+            message.style.background =
+                "#fff1f1";
+
+            message.style.color =
+                "#c0392b";
+
+            message.style.border =
+                "1px solid #f0c5c5";
+        }
+    }
+
+
+    /* =========================================
+       REGISTER USER
+    ========================================= */
+
+    function registerUser(event) {
+
+        event.preventDefault();
+
+
+        const accountType =
+            document.querySelector(
+                'input[name="accountType"]:checked'
+            ).value;
+
+
+        const fullName =
+            document.getElementById(
+                "fullName"
+            ).value.trim();
+
+
+        const email =
+            document.getElementById(
+                "email"
+            ).value.trim();
+
+
+        const phone =
+            document.getElementById(
+                "phone"
+            ).value.trim();
+
+
+        const password =
+            document.getElementById(
+                "password"
+            ).value;
+
+
+        const confirmPassword =
+            document.getElementById(
+                "confirmPassword"
+            ).value;
+
+
+        /* =====================================
+           BASIC VALIDATION
+        ===================================== */
+
+        if (
+            !fullName ||
+            !email ||
+            !phone ||
+            !password ||
+            !confirmPassword
+        ) {
+
+            showMessage(
+                "Please fill in all required fields.",
+                false
+            );
+
+            return;
+        }
+
+
+        if (!/^[0-9]{10}$/.test(phone)) {
+
+            showMessage(
+                "Please enter a valid 10-digit phone number.",
+                false
+            );
+
+            return;
+        }
+
+
+        if (password !== confirmPassword) {
+
+            showMessage(
+                "Passwords do not match.",
+                false
+            );
+
+            return;
+        }
+
+
+        if (password.length < 6) {
+
+            showMessage(
+                "Password must contain at least 6 characters.",
+                false
+            );
+
+            return;
+        }
+
+
+        /* =====================================
+           STUDENT
+        ===================================== */
+
+        if (accountType === "student") {
+
+            const department =
+                document.getElementById(
+                    "department"
+                ).value;
+
+
+            const year =
+                document.getElementById(
+                    "year"
+                ).value;
+
+
+            if (!department || !year) {
+
+                showMessage(
+                    "Please select department and year.",
+                    false
+                );
+
+                return;
+            }
+
+
+            const generatedStudentId =
+                generateStudentId();
+
+
+            const studentUser = {
+
+                accountType: "student",
+
+                fullName: fullName,
+
+                userId: generatedStudentId,
+
+                email: email,
+
+                phone: phone,
+
+                department: department,
+
+                year: year,
+
+                password: password
+            };
+
+
+            localStorage.setItem(
+                "registeredStudent",
+                JSON.stringify(studentUser)
+            );
+
+
+            localStorage.setItem(
+                "registeredUser",
+                JSON.stringify(studentUser)
+            );
+
+
+            localStorage.setItem(
+                "userType",
+                "student"
+            );
+
+
+            showMessage(
+                "Student account created successfully! Your ID is " +
+                generatedStudentId,
+                true
+            );
+
+
+            setTimeout(function () {
+
+                window.location.href =
+                    "login.html";
+
+            }, 1200);
+
+
+            return;
+        }
+
+
+        /* =====================================
+           ADMIN
+        ===================================== */
+
+        if (accountType === "admin") {
+
+            const adminRole =
+                document.getElementById(
+                    "adminRole"
+                ).value;
+
+
+            if (!adminRole) {
+
+                showMessage(
+                    "Please select an admin role.",
+                    false
+                );
+
+                return;
+            }
+
+
+            let adminNumber =
+                parseInt(
+                    localStorage.getItem(
+                        "adminNumber"
+                    ) || "0"
+                );
+
+
+            adminNumber++;
+
+
+            const generatedAdminId =
+                "ADM" +
+                String(adminNumber)
+                    .padStart(3, "0");
+
+
+            const adminUser = {
+
+                accountType: "admin",
+
+                fullName: fullName,
+
+                userId: generatedAdminId,
+
+                email: email,
+
+                phone: phone,
+
+                adminRole: adminRole,
+
+                password: password
+            };
+
+
+            localStorage.setItem(
+                "adminNumber",
+                adminNumber
+            );
+
+
+            localStorage.setItem(
+                "registeredAdmin",
+                JSON.stringify(adminUser)
+            );
+
+
+            localStorage.setItem(
+                "registeredUser",
+                JSON.stringify(adminUser)
+            );
+
+
+            localStorage.setItem(
+                "userType",
+                "admin"
+            );
+
+
+            showMessage(
+                "Admin account created successfully! ID: " +
+                generatedAdminId,
+                true
+            );
+
+
+            setTimeout(function () {
+
+                window.location.href =
+                    "login.html";
+
+            }, 1200);
+
+        }
+
+    }
+
+
+    /* =========================================
+       PAGE LOAD
+    ========================================= */
+
+    window.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            changeAccountType();
+
+        }
+    );
+
+</script>
+
+</body>
+</html>

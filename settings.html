@@ -1,0 +1,2393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ExamPortal | Settings</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+
+            background: #030817;
+
+            color: white;
+
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           GRID
+        ========================= */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(40,103,255,.055) 1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(40,103,255,.055) 1px,
+                    transparent 1px
+                );
+
+            background-size: 45px 45px;
+
+            z-index: -2;
+        }
+
+        .glow1 {
+
+            position: fixed;
+
+            width: 450px;
+            height: 450px;
+
+            top: -170px;
+            right: -180px;
+
+            background: #1749ff;
+
+            filter: blur(180px);
+
+            opacity: .13;
+
+            z-index: -1;
+        }
+
+        .glow2 {
+
+            position: fixed;
+
+            width: 450px;
+            height: 450px;
+
+            bottom: -200px;
+            left: -180px;
+
+            background: #7028ff;
+
+            filter: blur(180px);
+
+            opacity: .13;
+
+            z-index: -1;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar {
+
+            position: fixed;
+
+            left: 0;
+            top: 0;
+            bottom: 0;
+
+            width: 198px;
+
+            background:
+                rgba(3,10,28,.96);
+
+            border-right:
+                1px solid
+                rgba(70,100,170,.25);
+
+            padding: 22px 15px;
+
+            z-index: 10;
+        }
+
+        .sidebar-logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding: 0 9px;
+
+            margin-bottom: 40px;
+        }
+
+        .sidebar-logo img {
+
+            width: 30px;
+            height: 30px;
+
+            object-fit: cover;
+
+            object-position: left;
+
+            border-radius: 7px;
+        }
+
+        .sidebar-logo span {
+
+            font-size: 16px;
+
+            font-weight: 700;
+        }
+
+        .sidebar-logo span span {
+
+            color: #20cfff;
+        }
+
+        .menu-title {
+
+            color: #4f5d79;
+
+            font-size: 9px;
+
+            letter-spacing: 1.5px;
+
+            margin:
+                0 9px 10px;
+        }
+
+        .menu {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 5px;
+        }
+
+        .menu a {
+
+            height: 38px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 0 13px;
+
+            border-radius: 8px;
+
+            color: #8390aa;
+
+            text-decoration: none;
+
+            font-size: 11px;
+
+            transition: .3s;
+        }
+
+        .menu a:hover {
+
+            color: white;
+
+            background:
+                rgba(40,101,255,.08);
+        }
+
+        .menu a.active {
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2865ff,
+                    #3433a8
+                );
+
+            box-shadow:
+                0 6px 20px
+                rgba(40,101,255,.25);
+        }
+
+        .menu-icon {
+
+            width: 15px;
+
+            text-align: center;
+
+            font-size: 12px;
+        }
+
+        .logout {
+
+            position: absolute;
+
+            bottom: 25px;
+
+            left: 15px;
+            right: 15px;
+        }
+
+        .logout a {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 10px;
+
+            color: #ff6c7a;
+
+            text-decoration: none;
+
+            font-size: 10px;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+
+            margin-left: 198px;
+
+            min-height: 100vh;
+
+            padding:
+                25px 30px 50px;
+        }
+
+        /* =========================
+           TOPBAR
+        ========================= */
+
+        .topbar {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 32px;
+        }
+
+        .search {
+
+            position: relative;
+
+            width: 260px;
+
+            height: 36px;
+        }
+
+        .search input {
+
+            width: 100%;
+            height: 100%;
+
+            padding:
+                0 15px 0 40px;
+
+            border:
+                1px solid #203966;
+
+            border-radius: 7px;
+
+            outline: none;
+
+            background:
+                rgba(7,18,44,.75);
+
+            color: white;
+
+            font-size: 10px;
+        }
+
+        .search input::placeholder {
+
+            color: #566580;
+        }
+
+        .search-icon {
+
+            position: absolute;
+
+            left: 14px;
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            font-size: 12px;
+        }
+
+        .top-actions {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .notification {
+
+            position: relative;
+
+            font-size: 15px;
+        }
+
+        .notification-dot {
+
+            position: absolute;
+
+            width: 5px;
+            height: 5px;
+
+            background: #ff5370;
+
+            border-radius: 50%;
+
+            right: -2px;
+            top: -1px;
+        }
+
+        .avatar {
+
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2865ff,
+                    #693cff
+                );
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+        /* =========================
+           TITLE
+        ========================= */
+
+        .page-title {
+
+            margin-bottom: 22px;
+        }
+
+        .page-title h1 {
+
+            font-size: 25px;
+
+            margin-bottom: 7px;
+        }
+
+        .page-title h1 span {
+
+            color: #69b8ff;
+        }
+
+        .page-title p {
+
+            color: #687895;
+
+            font-size: 10px;
+        }
+
+        /* =========================
+           SETTINGS LAYOUT
+        ========================= */
+
+        .settings-container {
+
+            max-width: 950px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 15px;
+        }
+
+        /* =========================
+           SETTINGS CARD
+        ========================= */
+
+        .settings-card {
+
+            background:
+                rgba(7,19,46,.86);
+
+            border:
+                1px solid #203966;
+
+            border-radius: 12px;
+
+            padding: 20px;
+        }
+
+        .settings-header {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 20px;
+        }
+
+        .settings-header-icon {
+
+            width: 36px;
+            height: 36px;
+
+            border-radius: 8px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                rgba(40,101,255,.12);
+
+            color: #69b8ff;
+
+            font-size: 15px;
+        }
+
+        .settings-header h3 {
+
+            font-size: 13px;
+
+            margin-bottom: 3px;
+        }
+
+        .settings-header p {
+
+            color: #5e6e89;
+
+            font-size: 8px;
+        }
+
+        /* =========================
+           SETTING ROW
+        ========================= */
+
+        .setting-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            padding: 15px 0;
+
+            border-top:
+                1px solid
+                rgba(70,100,170,.16);
+        }
+
+        .setting-info {
+
+            flex: 1;
+        }
+
+        .setting-info h4 {
+
+            font-size: 10px;
+
+            margin-bottom: 4px;
+        }
+
+        .setting-info p {
+
+            color: #5e6e89;
+
+            font-size: 8px;
+
+            line-height: 1.5;
+        }
+
+        /* =========================
+           TOGGLE
+        ========================= */
+
+        .switch {
+
+            position: relative;
+
+            width: 42px;
+            height: 22px;
+
+            flex-shrink: 0;
+        }
+
+        .switch input {
+
+            display: none;
+        }
+
+        .slider {
+
+            position: absolute;
+
+            inset: 0;
+
+            background: #16233f;
+
+            border:
+                1px solid #30456b;
+
+            border-radius: 20px;
+
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+        .slider::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 16px;
+            height: 16px;
+
+            left: 2px;
+            top: 2px;
+
+            background: #71809b;
+
+            border-radius: 50%;
+
+            transition: .3s;
+        }
+
+        .switch input:checked + .slider {
+
+            background:
+                rgba(40,101,255,.5);
+
+            border-color:
+                #2865ff;
+        }
+
+        .switch input:checked + .slider::before {
+
+            transform:
+                translateX(19px);
+
+            background: #20cfff;
+        }
+
+        /* =========================
+           SELECT
+        ========================= */
+
+        .setting-select {
+
+            min-width: 160px;
+
+            padding: 9px 12px;
+
+            border:
+                1px solid #203966;
+
+            border-radius: 7px;
+
+            background:
+                #07132e;
+
+            color: #b7c5da;
+
+            outline: none;
+
+            font-size: 9px;
+        }
+
+        .setting-select:focus {
+
+            border-color: #2865ff;
+        }
+
+        .setting-select option {
+
+            background: #07132e;
+
+            color: white;
+        }
+
+        /* =========================
+           ACCOUNT INFO
+        ========================= */
+
+        .account-info {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 12px;
+        }
+
+        .info-box {
+
+            padding: 12px;
+
+            border:
+                1px solid #203966;
+
+            border-radius: 8px;
+
+            background:
+                rgba(2,10,29,.5);
+        }
+
+        .info-box label {
+
+            display: block;
+
+            color: #5e6e89;
+
+            font-size: 8px;
+
+            margin-bottom: 5px;
+        }
+
+        .info-box span {
+
+            color: #c4d0e3;
+
+            font-size: 10px;
+
+            word-break: break-word;
+        }
+
+        /* =========================
+           PASSWORD
+        ========================= */
+
+        .password-btn {
+
+            padding: 9px 14px;
+
+            border:
+                1px solid #2855a4;
+
+            border-radius: 7px;
+
+            background:
+                rgba(40,101,255,.06);
+
+            color: #5ba9ff;
+
+            font-size: 9px;
+
+            cursor: pointer;
+        }
+
+        .password-btn:hover {
+
+            border-color: #20cfff;
+
+            background:
+                rgba(40,101,255,.12);
+        }
+
+        /* =========================
+           SAVE
+        ========================= */
+
+        .save-area {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 10px;
+
+            max-width: 950px;
+
+            margin-top: 5px;
+        }
+
+        .reset-btn {
+
+            padding: 11px 18px;
+
+            border:
+                1px solid #30456b;
+
+            border-radius: 8px;
+
+            background:
+                transparent;
+
+            color: #7e8da7;
+
+            font-size: 9px;
+
+            cursor: pointer;
+        }
+
+        .save-btn {
+
+            padding: 11px 22px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #20cfff,
+                    #2865ff
+                );
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 7px 20px
+                rgba(40,101,255,.25);
+        }
+
+        .save-btn:hover {
+
+            transform:
+                translateY(-1px);
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media(max-width:700px) {
+
+            .sidebar {
+
+                width: 65px;
+
+                padding:
+                    20px 8px;
+            }
+
+            .sidebar-logo {
+
+                justify-content: center;
+
+                padding: 0;
+            }
+
+            .sidebar-logo img {
+
+                width: 35px;
+                height: 35px;
+            }
+
+            .sidebar-logo span,
+            .menu-title,
+            .menu a span:not(.menu-icon),
+            .logout span {
+
+                display: none;
+            }
+
+            .menu a {
+
+                justify-content: center;
+
+                padding: 0;
+            }
+
+            .logout a {
+
+                justify-content: center;
+            }
+
+            .main {
+
+                margin-left: 65px;
+
+                padding: 20px;
+            }
+
+            .search {
+
+                width: 180px;
+            }
+
+            .account-info {
+
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width:500px) {
+
+            .search {
+
+                width: 140px;
+            }
+
+            .setting-row {
+
+                align-items: flex-start;
+            }
+
+            .setting-select {
+
+                min-width: 120px;
+            }
+
+            .save-area {
+
+                justify-content: stretch;
+            }
+
+            .save-btn,
+            .reset-btn {
+
+                flex: 1;
+            }
+        }
+
+    
+/* =========================
+   EXAMPORTAL LIGHT THEME
+   ========================= */
+
+html{
+    background:#f5f8f8 !important;
+}
+
+body{
+    background:#f5f8f8 !important;
+    color:#173033 !important;
+}
+
+body::before{
+    background-image:
+        linear-gradient(rgba(20,123,125,.055) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(20,123,125,.055) 1px,transparent 1px) !important;
+}
+
+.glow1{
+    background:#55aaa8 !important;
+    opacity:.07 !important;
+}
+
+.glow2{
+    background:#8bc8c5 !important;
+    opacity:.07 !important;
+}
+
+.sidebar{
+    background:#ffffff !important;
+    border-right:1px solid #e1e9e8 !important;
+    box-shadow:4px 0 18px rgba(23,48,51,.04);
+}
+
+.sidebar-logo span{
+    color:#173033 !important;
+}
+
+.sidebar-logo span span{
+    color:#147b7d !important;
+}
+
+.menu-title{
+    color:#99a6a6 !important;
+}
+
+.menu a{
+    color:#718080 !important;
+}
+
+.menu a:hover{
+    color:#147b7d !important;
+    background:#edf7f7 !important;
+}
+
+.menu a.active{
+    color:#ffffff !important;
+    background:linear-gradient(135deg,#147b7d,#249998) !important;
+    box-shadow:0 7px 20px rgba(20,123,125,.18) !important;
+}
+
+.logout a{
+    color:#d65b64 !important;
+}
+
+.search input{
+    background:#ffffff !important;
+    border:1px solid #dbe6e5 !important;
+    color:#173033 !important;
+    box-shadow:0 2px 8px rgba(23,48,51,.03);
+}
+
+.search input::placeholder{
+    color:#9aa8a8 !important;
+}
+
+.page-title h1{
+    color:#173033 !important;
+}
+
+.page-title h1 span{
+    color:#147b7d !important;
+}
+
+.page-title p{
+    color:#7a8989 !important;
+}
+
+.avatar{
+    background:linear-gradient(135deg,#147b7d,#55aaa8) !important;
+    box-shadow:0 5px 16px rgba(20,123,125,.15);
+}
+
+/* Cards / panels */
+.notification-panel,
+.settings-card{
+    background:#ffffff !important;
+    border:1px solid #dbe6e5 !important;
+    box-shadow:0 5px 18px rgba(23,48,51,.04);
+}
+
+/* Notification page */
+.notification-header h3,
+.notification-content h4,
+.settings-header h3,
+.setting-info h4{
+    color:#173033 !important;
+}
+
+.small-btn,
+.password-btn{
+    border:1px solid #a9d0ce !important;
+    background:#edf7f7 !important;
+    color:#147b7d !important;
+}
+
+.small-btn:hover,
+.password-btn:hover{
+    border-color:#147b7d !important;
+    background:#e1f2f1 !important;
+}
+
+.notification-item{
+    border:1px solid #dbe6e5 !important;
+    background:#fbfdfd !important;
+}
+
+.notification-item:hover{
+    border-color:#a9d0ce !important;
+    background:#f3faf9 !important;
+}
+
+.notification-item.unread{
+    border-left:3px solid #147b7d !important;
+    background:#edf8f7 !important;
+}
+
+.notification-icon,
+.settings-header-icon{
+    background:#edf7f7 !important;
+    color:#147b7d !important;
+}
+
+.notification-content p,
+.setting-info p,
+.settings-header p{
+    color:#7a8989 !important;
+}
+
+.notification-time,
+.empty{
+    color:#8b9999 !important;
+}
+
+.read-btn{
+    color:#147b7d !important;
+}
+
+.delete-btn{
+    color:#d65b64 !important;
+}
+
+.empty h3{
+    color:#354b4d !important;
+}
+
+/* Settings page */
+.setting-row{
+    border-top:1px solid #e5eeee !important;
+}
+
+.slider{
+    background:#e7eeee !important;
+    border:1px solid #cbdad9 !important;
+}
+
+.slider::before{
+    background:#91a2a2 !important;
+}
+
+.switch input:checked + .slider{
+    background:#d7efed !important;
+    border-color:#147b7d !important;
+}
+
+.switch input:checked + .slider::before{
+    background:#147b7d !important;
+}
+
+.setting-select{
+    background:#ffffff !important;
+    border:1px solid #dbe6e5 !important;
+    color:#354b4d !important;
+}
+
+.setting-select:focus{
+    border-color:#147b7d !important;
+}
+
+.setting-select option{
+    background:#ffffff !important;
+    color:#173033 !important;
+}
+
+.info-box{
+    background:#fbfdfd !important;
+    border:1px solid #dbe6e5 !important;
+}
+
+.info-box label{
+    color:#7a8989 !important;
+}
+
+.info-box span{
+    color:#354b4d !important;
+}
+
+.reset-btn{
+    border:1px solid #cbdad9 !important;
+    color:#718080 !important;
+    background:#ffffff !important;
+}
+
+.save-btn{
+    background:linear-gradient(135deg,#147b7d,#249998) !important;
+    color:#ffffff !important;
+    box-shadow:0 7px 20px rgba(20,123,125,.18) !important;
+}
+
+/* Security/status accent */
+[style*="color:#29d6ba"]{
+    color:#147b7d !important;
+}
+
+    
+/* =========================================================
+   EXAMPORTAL - GLOBAL SIDEBAR FONT SIZE FIX
+   Keep sidebar typography identical on every page.
+   ========================================================= */
+
+.sidebar,
+.sidebar *,
+.menu,
+.menu * {
+    font-family: "Segoe UI", Arial, sans-serif !important;
+}
+
+/* Main navigation links */
+.sidebar .menu a,
+.menu a,
+.sidebar > a,
+.sidebar a:not(.logo):not(.sidebar-logo) {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    line-height: 1.2 !important;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    transform: none !important;
+    scale: 1 !important;
+    box-sizing: border-box !important;
+}
+
+/* Active item must have exactly the same font size */
+.sidebar .menu a.active,
+.menu a.active,
+.sidebar > a.active,
+.sidebar a.active {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    line-height: 1.2 !important;
+    transform: none !important;
+    scale: 1 !important;
+}
+
+/* Hover must not increase text size */
+.sidebar .menu a:hover,
+.menu a:hover,
+.sidebar > a:hover,
+.sidebar a:hover {
+    font-size: 13px !important;
+    transform: none !important;
+    scale: 1 !important;
+}
+
+/* Navigation icons */
+.sidebar .menu-icon,
+.menu .menu-icon,
+.sidebar a i,
+.sidebar a svg {
+    font-size: 13px !important;
+    transform: none !important;
+    scale: 1 !important;
+    flex-shrink: 0;
+}
+
+/* Navigation text spans */
+.sidebar .menu a span:not(.menu-icon),
+.menu a span:not(.menu-icon) {
+    font-size: 13px !important;
+    line-height: 1.2 !important;
+    transform: none !important;
+    scale: 1 !important;
+}
+
+/* Logout text stays consistent */
+.sidebar .logout a,
+.sidebar .logout,
+.sidebar .logout span {
+    font-size: 13px !important;
+    line-height: 1.2 !important;
+    transform: none !important;
+    scale: 1 !important;
+}
+
+/* Never zoom sidebar when clicking Exam / Result */
+.sidebar a:active,
+.menu a:active {
+    font-size: 13px !important;
+    transform: none !important;
+    scale: 1 !important;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+    <div class="glow1"></div>
+    <div class="glow2"></div>
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================= -->
+
+    <aside class="sidebar">
+
+
+        <div class="sidebar-logo">
+
+            <img
+                src="logo.png"
+                alt="ExamPortal Logo">
+
+            <span>
+                Exam<span>Portal</span>
+            </span>
+
+        </div>
+
+
+        <div class="menu-title">
+            MAIN MENU
+        </div>
+
+
+        <nav class="menu">
+
+
+            <a href="dashboard.html">
+
+                <span class="menu-icon">
+                    ⌂
+                </span>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a href="exam.html">
+
+                <span class="menu-icon">
+                    ▣
+                </span>
+
+                <span>
+                    My Exams
+                </span>
+
+            </a>
+
+
+            <a href="result.html">
+
+                <span class="menu-icon">
+                    ◇
+                </span>
+
+                <span>
+                    Results
+                </span>
+
+            </a>
+
+
+            <a href="profile.html">
+
+                <span class="menu-icon">
+                    ◯
+                </span>
+
+                <span>
+                    Profile
+                </span>
+
+            </a>
+
+
+            <a href="notifications.html">
+
+                <span class="menu-icon">
+                    ♢
+                </span>
+
+                <span>
+                    Notifications
+                </span>
+
+            </a>
+
+
+            <a
+                href="settings.html"
+                class="active">
+
+                <span class="menu-icon">
+                    ⚙
+                </span>
+
+                <span>
+                    Settings
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="logout">
+
+            <a
+                href="#"
+                onclick="logoutUser()">
+
+                <span>
+                    ↪
+                </span>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="main">
+
+
+        <!-- TOPBAR -->
+
+        <div class="topbar">
+
+
+            <div class="search">
+
+                <span class="search-icon">
+                    🔍
+                </span>
+
+                <input
+                    type="text"
+                    placeholder="Search exams...">
+
+            </div>
+
+
+            <div class="top-actions">
+
+                <div class="notification">
+
+                    ♧
+
+                    <span
+                        class="notification-dot">
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="avatar"
+                    id="userAvatar">
+
+                    U
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PAGE TITLE -->
+
+        <div class="page-title">
+
+            <h1>
+                Account <span>Settings</span>
+            </h1>
+
+            <p>
+                Customize your ExamPortal experience and account preferences.
+            </p>
+
+        </div>
+
+
+
+        <div class="settings-container">
+
+
+            <!-- =========================
+                 ACCOUNT INFORMATION
+            ========================= -->
+
+            <div class="settings-card">
+
+
+                <div class="settings-header">
+
+                    <div class="settings-header-icon">
+                        👤
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Account Information
+                        </h3>
+
+                        <p>
+                            Your registered account details
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="account-info">
+
+
+                    <div class="info-box">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <span id="userName">
+                            -
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <label>
+                            Email Address
+                        </label>
+
+                        <span id="userEmail">
+                            -
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <label>
+                            User ID
+                        </label>
+
+                        <span id="userId">
+                            -
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <label>
+                            Account Type
+                        </label>
+
+                        <span id="accountType">
+                            -
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 NOTIFICATIONS
+            ========================= -->
+
+            <div class="settings-card">
+
+
+                <div class="settings-header">
+
+                    <div class="settings-header-icon">
+                        🔔
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Notification Preferences
+                        </h3>
+
+                        <p>
+                            Choose which notifications you want to receive
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <h4>
+                            Exam Reminders
+                        </h4>
+
+                        <p>
+                            Receive reminders before your scheduled exams.
+                        </p>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="examReminder"
+                            checked>
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <h4>
+                            Result Notifications
+                        </h4>
+
+                        <p>
+                            Get notified when examination results are published.
+                        </p>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="resultNotification"
+                            checked>
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <h4>
+                            New Exam Notifications
+                        </h4>
+
+                        <p>
+                            Receive updates when new exams are available.
+                        </p>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="newExamNotification"
+                            checked>
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 EXAM PREFERENCES
+            ========================= -->
+
+            <div class="settings-card">
+
+
+                <div class="settings-header">
+
+                    <div class="settings-header-icon">
+                        📝
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Exam Preferences
+                        </h3>
+
+                        <p>
+                            Customize your examination experience
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <h4>
+                            Question Navigation
+                        </h4>
+
+                        <p>
+                            Choose how questions are displayed during exams.
+                        </p>
+
+                    </div>
+
+
+                    <select
+                        class="setting-select"
+                        id="navigationMode">
+
+                        <option value="one">
+                            One Question at a Time
+                        </option>
+
+                        <option value="all">
+                            Show All Questions
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <h4>
+                            Auto Save Answers
+                        </h4>
+
+                        <p>
+                            Automatically save your selected answers.
+                        </p>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="autoSave"
+                            checked>
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <h4>
+                            Show Timer
+                        </h4>
+
+                        <p>
+                            Display the remaining exam time.
+                        </p>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="showTimer"
+                            checked>
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 APPEARANCE
+            ========================= -->
+
+            <div class="settings-card">
+
+
+                <div class="settings-header">
+
+                    <div class="settings-header-icon">
+                        🎨
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Appearance
+                        </h3>
+
+                        <p>
+                            Customize the look of ExamPortal
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <h4>
+                            Theme
+                        </h4>
+
+                        <p>
+                            Select your preferred interface theme.
+                        </p>
+
+                    </div>
+
+
+                    <select
+                        class="setting-select"
+                        id="theme">
+
+                        <option value="light" selected>
+                            Light
+                        </option>
+
+                        <option value="system">
+                            System Default
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <h4>
+                            Compact Interface
+                        </h4>
+
+                        <p>
+                            Use a more compact layout for dashboard content.
+                        </p>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="compactMode">
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 SECURITY
+            ========================= -->
+
+            <div class="settings-card">
+
+
+                <div class="settings-header">
+
+                    <div class="settings-header-icon">
+                        🛡️
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Security
+                        </h3>
+
+                        <p>
+                            Manage your account security
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <h4>
+                            Password
+                        </h4>
+
+                        <p>
+                            Change your ExamPortal account password.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="password-btn"
+                        onclick="changePassword()">
+
+                        Change Password
+
+                    </button>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <h4>
+                            Account Status
+                        </h4>
+
+                        <p>
+                            Your ExamPortal account is currently active.
+                        </p>
+
+                    </div>
+
+
+                    <span
+                        style="
+                        color:#29d6ba;
+                        font-size:9px;
+                        font-weight:600;
+                        ">
+
+                        ● Active
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SAVE BUTTONS -->
+
+        <div class="save-area">
+
+            <button
+                class="reset-btn"
+                onclick="resetSettings()">
+
+                Reset
+
+            </button>
+
+
+            <button
+                class="save-btn"
+                onclick="saveSettings()">
+
+                Save Settings
+
+            </button>
+
+        </div>
+
+    </main>
+
+
+
+    <script>
+
+
+        /* =========================
+           GET USER
+        ========================= */
+
+        const loggedInUser =
+            JSON.parse(
+                localStorage.getItem(
+                    "loggedInUser"
+                )
+            );
+
+
+        if (!loggedInUser) {
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+        /* =========================
+           LOAD USER INFORMATION
+        ========================= */
+
+        function loadUser() {
+
+            if (!loggedInUser) {
+                return;
+            }
+
+
+            document.getElementById(
+                "userName"
+            ).textContent =
+                loggedInUser.fullName || "-";
+
+
+            document.getElementById(
+                "userEmail"
+            ).textContent =
+                loggedInUser.email || "-";
+
+
+            document.getElementById(
+                "userId"
+            ).textContent =
+                loggedInUser.userId || "-";
+
+
+            document.getElementById(
+                "accountType"
+            ).textContent =
+                loggedInUser.accountType ===
+                "admin"
+                ? "Administrator"
+                : "Student";
+
+
+            /* AVATAR */
+
+            document.getElementById(
+                "userAvatar"
+            ).textContent =
+                loggedInUser.fullName
+                    ? loggedInUser.fullName
+                        .charAt(0)
+                        .toUpperCase()
+                    : "U";
+
+        }
+
+
+        /* =========================
+           SAVE SETTINGS
+        ========================= */
+
+        function saveSettings() {
+
+
+            const settings = {
+
+                examReminder:
+                    document.getElementById(
+                        "examReminder"
+                    ).checked,
+
+                resultNotification:
+                    document.getElementById(
+                        "resultNotification"
+                    ).checked,
+
+                newExamNotification:
+                    document.getElementById(
+                        "newExamNotification"
+                    ).checked,
+
+                navigationMode:
+                    document.getElementById(
+                        "navigationMode"
+                    ).value,
+
+                autoSave:
+                    document.getElementById(
+                        "autoSave"
+                    ).checked,
+
+                showTimer:
+                    document.getElementById(
+                        "showTimer"
+                    ).checked,
+
+                theme:
+                    document.getElementById(
+                        "theme"
+                    ).value,
+
+                compactMode:
+                    document.getElementById(
+                        "compactMode"
+                    ).checked
+
+            };
+
+
+            localStorage.setItem(
+                "examPortalSettings",
+                JSON.stringify(settings)
+            );
+
+
+            alert(
+                "Settings saved successfully!"
+            );
+
+        }
+
+
+        /* =========================
+           LOAD SETTINGS
+        ========================= */
+
+        function loadSettings() {
+
+            const saved =
+                JSON.parse(
+                    localStorage.getItem(
+                        "examPortalSettings"
+                    )
+                );
+
+
+            if (!saved) {
+                return;
+            }
+
+
+            document.getElementById(
+                "examReminder"
+            ).checked =
+                saved.examReminder;
+
+
+            document.getElementById(
+                "resultNotification"
+            ).checked =
+                saved.resultNotification;
+
+
+            document.getElementById(
+                "newExamNotification"
+            ).checked =
+                saved.newExamNotification;
+
+
+            document.getElementById(
+                "navigationMode"
+            ).value =
+                saved.navigationMode;
+
+
+            document.getElementById(
+                "autoSave"
+            ).checked =
+                saved.autoSave;
+
+
+            document.getElementById(
+                "showTimer"
+            ).checked =
+                saved.showTimer;
+
+
+            document.getElementById(
+                "theme"
+            ).value =
+                saved.theme;
+
+
+            document.getElementById(
+                "compactMode"
+            ).checked =
+                saved.compactMode;
+
+        }
+
+
+        /* =========================
+           RESET
+        ========================= */
+
+        function resetSettings() {
+
+            const confirmReset =
+                confirm(
+                    "Reset all settings to default?"
+                );
+
+
+            if (!confirmReset) {
+                return;
+            }
+
+
+            document.getElementById(
+                "examReminder"
+            ).checked = true;
+
+
+            document.getElementById(
+                "resultNotification"
+            ).checked = true;
+
+
+            document.getElementById(
+                "newExamNotification"
+            ).checked = true;
+
+
+            document.getElementById(
+                "navigationMode"
+            ).value = "one";
+
+
+            document.getElementById(
+                "autoSave"
+            ).checked = true;
+
+
+            document.getElementById(
+                "showTimer"
+            ).checked = true;
+
+
+            document.getElementById(
+                "theme"
+            ).value = "light";
+
+
+            document.getElementById(
+                "compactMode"
+            ).checked = false;
+
+
+            localStorage.removeItem(
+                "examPortalSettings"
+            );
+
+
+            alert(
+                "Settings restored to default."
+            );
+
+        }
+
+
+        /* =========================
+           CHANGE PASSWORD
+        ========================= */
+
+        function changePassword() {
+
+            if (!loggedInUser) {
+                return;
+            }
+
+
+            const currentPassword =
+                prompt(
+                    "Enter your current password:"
+                );
+
+
+            if (currentPassword === null) {
+                return;
+            }
+
+
+            if (
+                currentPassword !==
+                loggedInUser.password
+            ) {
+
+                alert(
+                    "Current password is incorrect."
+                );
+
+                return;
+            }
+
+
+            const newPassword =
+                prompt(
+                    "Enter your new password:"
+                );
+
+
+            if (newPassword === null) {
+                return;
+            }
+
+
+            if (newPassword.length < 6) {
+
+                alert(
+                    "Password must contain at least 6 characters."
+                );
+
+                return;
+            }
+
+
+            const confirmPassword =
+                prompt(
+                    "Confirm your new password:"
+                );
+
+
+            if (
+                newPassword !==
+                confirmPassword
+            ) {
+
+                alert(
+                    "Passwords do not match."
+                );
+
+                return;
+            }
+
+
+            loggedInUser.password =
+                newPassword;
+
+
+            localStorage.setItem(
+                "loggedInUser",
+                JSON.stringify(loggedInUser)
+            );
+
+
+            if (
+                loggedInUser.accountType ===
+                "admin"
+            ) {
+
+                localStorage.setItem(
+                    "registeredAdmin",
+                    JSON.stringify(loggedInUser)
+                );
+
+            }
+            else {
+
+                localStorage.setItem(
+                    "registeredStudent",
+                    JSON.stringify(loggedInUser)
+                );
+
+            }
+
+
+            alert(
+                "Password changed successfully!"
+            );
+
+        }
+
+
+        /* =========================
+           LOGOUT
+        ========================= */
+
+        function logoutUser() {
+
+            localStorage.removeItem(
+                "loggedInUser"
+            );
+
+            localStorage.removeItem(
+                "userType"
+            );
+
+            window.location.href =
+                "index.html";
+
+        }
+
+
+        /* START */
+
+        loadUser();
+
+        loadSettings();
+
+    </script>
+
+</body>
+
+</html>

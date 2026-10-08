@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>ExamPortal | Online Examination System</title>
+
+<style>
+
+/* ================= RESET ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f5f7f7;
+    color:#172525;
+}
+
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    height:78px;
+
+    background:#ffffff;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 6%;
+
+    border-bottom:1px solid #e4e9e8;
+
+    position:sticky;
+    top:0;
+
+    z-index:1000;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+
+    gap:11px;
+
+    font-size:24px;
+    font-weight:800;
+
+    color:#143c3d;
+}
+
+.brand img{
+    width:43px;
+    height:43px;
+
+    object-fit:contain;
+}
+
+.brand span{
+    color:#17696a;
+}
+
+.nav{
+    display:flex;
+    gap:30px;
+}
+
+.nav a{
+    color:#607070;
+
+    text-decoration:none;
+
+    font-size:13px;
+    font-weight:600;
+
+    transition:.2s;
+}
+
+.nav a:hover{
+    color:#155e60;
+}
+
+.login-area{
+    display:flex;
+    gap:9px;
+}
+
+.login{
+    text-decoration:none;
+
+    padding:11px 18px;
+
+    border-radius:8px;
+
+    font-size:12px;
+    font-weight:bold;
+
+    transition:.2s;
+}
+
+.login:hover{
+    transform:translateY(-1px);
+}
+
+.student{
+    color:white;
+    background:#155e60;
+}
+
+.student:hover{
+    background:#104d4f;
+}
+
+.admin{
+    color:white;
+    background:#152727;
+}
+
+.admin:hover{
+    background:#0e1d1d;
+}
+
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:610px;
+
+    padding:65px 6% 75px;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1.15fr;
+
+    gap:60px;
+
+    align-items:center;
+
+    background:
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(28,104,105,.10),
+            transparent 32%
+        ),
+        #f5f7f7;
+
+    overflow:hidden;
+}
+
+
+/* ================= HERO LEFT ================= */
+
+.hero-left{
+    max-width:570px;
+}
+
+.eyebrow{
+    display:inline-block;
+
+    padding:8px 13px;
+
+    border-radius:20px;
+
+    background:#e4f1f0;
+
+    color:#155e60;
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    letter-spacing:.8px;
+
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:57px;
+
+    line-height:1.04;
+
+    letter-spacing:-2.5px;
+
+    color:#162626;
+
+    margin-bottom:22px;
+}
+
+.hero h1 span{
+    color:#155e60;
+}
+
+.hero-text{
+    color:#687878;
+
+    font-size:15px;
+
+    line-height:1.8;
+
+    max-width:520px;
+
+    margin-bottom:28px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.primary-btn,
+.outline-btn{
+    text-decoration:none;
+
+    padding:14px 22px;
+
+    border-radius:8px;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    transition:.2s;
+}
+
+.primary-btn{
+    background:#155e60;
+
+    color:white;
+
+    box-shadow:
+        0 8px 20px rgba(21,94,96,.18);
+}
+
+.primary-btn:hover{
+    background:#104d4f;
+
+    transform:translateY(-2px);
+}
+
+.outline-btn{
+    background:white;
+
+    color:#173434;
+
+    border:1px solid #d8e0df;
+}
+
+.outline-btn:hover{
+    border-color:#155e60;
+
+    color:#155e60;
+}
+
+
+/* ================= DASHBOARD PREVIEW ================= */
+
+.preview-area{
+    position:relative;
+
+    min-height:450px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+}
+
+.preview-shadow{
+    position:absolute;
+
+    width:500px;
+    height:400px;
+
+    background:#dcebea;
+
+    border-radius:40px;
+
+    transform:rotate(-5deg);
+
+    opacity:.65;
+}
+
+.dashboard{
+    position:relative;
+
+    width:570px;
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    border:1px solid #dfe6e5;
+
+    box-shadow:
+        0 25px 60px rgba(30,55,55,.15);
+
+    padding:18px;
+
+    transform:rotate(-2deg);
+
+    z-index:2;
+}
+
+
+/* ================= DASHBOARD TOP ================= */
+
+.dash-top{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:5px 4px 17px;
+}
+
+.dash-title{
+    font-size:19px;
+
+    font-weight:bold;
+
+    color:#172727;
+}
+
+.dash-date{
+    color:#7b8888;
+
+    font-size:9px;
+}
+
+
+/* ================= MINI STATS ================= */
+
+.mini-stats{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:9px;
+
+    margin-bottom:12px;
+}
+
+.mini-card{
+    border:1px solid #e4e9e8;
+
+    border-radius:10px;
+
+    padding:13px;
+
+    background:#fff;
+}
+
+.mini-card p{
+    color:#7a8888;
+
+    font-size:8px;
+
+    margin-bottom:7px;
+}
+
+.mini-card h3{
+    font-size:20px;
+
+    color:#172727;
+}
+
+.mini-card span{
+    color:#1b8175;
+
+    font-size:8px;
+
+    margin-left:4px;
+}
+
+
+/* ================= PREVIEW GRID ================= */
+
+.preview-grid{
+    display:grid;
+
+    grid-template-columns:
+        1.55fr 1fr;
+
+    gap:10px;
+}
+
+
+/* ================= PERFORMANCE ================= */
+
+.performance{
+    border:1px solid #e4e9e8;
+
+    border-radius:11px;
+
+    padding:15px;
+
+    background:white;
+}
+
+.card-heading{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:12px;
+}
+
+.card-heading strong{
+    font-size:11px;
+}
+
+.card-heading small{
+    color:#788585;
+
+    font-size:8px;
+}
+
+.chart{
+    height:145px;
+
+    position:relative;
+
+    border-bottom:1px solid #dfe5e4;
+
+    border-left:1px solid #dfe5e4;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    gap:8px;
+
+    padding:12px 10px 0;
+}
+
+.bar{
+    flex:1;
+
+    background:#d9e5e4;
+
+    border-radius:5px 5px 0 0;
+}
+
+.bar.active{
+    background:#155e60;
+}
+
+.bar:nth-child(1){
+    height:35%;
+}
+
+.bar:nth-child(2){
+    height:50%;
+}
+
+.bar:nth-child(3){
+    height:42%;
+}
+
+.bar:nth-child(4){
+    height:66%;
+}
+
+.bar:nth-child(5){
+    height:58%;
+}
+
+.bar:nth-child(6){
+    height:80%;
+}
+
+.bar:nth-child(7){
+    height:72%;
+}
+
+.bar:nth-child(8){
+    height:92%;
+}
+
+.chart-labels{
+    display:flex;
+
+    justify-content:space-between;
+
+    color:#899494;
+
+    font-size:7px;
+
+    padding-top:6px;
+}
+
+
+/* ================= LIVE EXAM ================= */
+
+.live-card{
+    background:#155e60;
+
+    color:white;
+
+    border-radius:11px;
+
+    padding:16px;
+
+    min-height:195px;
+}
+
+.live-label{
+    font-size:8px;
+
+    color:#a8d5d1;
+
+    margin-bottom:11px;
+}
+
+.live-card h3{
+    font-size:15px;
+
+    line-height:1.3;
+
+    margin-bottom:13px;
+}
+
+.live-info{
+    display:flex;
+
+    justify-content:space-between;
+
+    border-top:1px solid rgba(255,255,255,.18);
+
+    padding-top:12px;
+
+    font-size:8px;
+
+    color:#c7dfdc;
+}
+
+.live-number{
+    font-size:25px;
+
+    font-weight:bold;
+
+    margin-bottom:3px;
+}
+
+
+/* ================= QUESTION ================= */
+
+.question-preview{
+    grid-column:1 / 3;
+
+    border:1px solid #e4e9e8;
+
+    border-radius:11px;
+
+    padding:14px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.question-info small{
+    color:#7b8888;
+
+    font-size:8px;
+}
+
+.question-info h4{
+    margin-top:5px;
+
+    font-size:12px;
+}
+
+.question-progress{
+    width:130px;
+
+    height:7px;
+
+    background:#e5ebea;
+
+    border-radius:10px;
+
+    overflow:hidden;
+}
+
+.question-progress span{
+    display:block;
+
+    width:68%;
+
+    height:100%;
+
+    background:#155e60;
+}
+
+
+/* ================= FLOATING ================= */
+
+.floating{
+    position:absolute;
+
+    right:-20px;
+    bottom:25px;
+
+    background:white;
+
+    padding:12px 15px;
+
+    border-radius:10px;
+
+    box-shadow:
+        0 12px 30px rgba(30,55,55,.15);
+
+    font-size:9px;
+
+    z-index:4;
+}
+
+.floating strong{
+    display:block;
+
+    color:#155e60;
+
+    margin-bottom:3px;
+}
+
+
+/* ================= STATS ================= */
+
+.stats{
+    padding:0 6% 70px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:13px;
+}
+
+.stat{
+    background:white;
+
+    border:1px solid #e1e7e6;
+
+    border-radius:12px;
+
+    padding:20px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.stat-icon{
+    width:38px;
+    height:38px;
+
+    border-radius:9px;
+
+    background:#e6f1f0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    margin-bottom:13px;
+
+    color:#155e60;
+
+    font-size:17px;
+}
+
+.stat small{
+    color:#7a8787;
+
+    font-size:9px;
+}
+
+.stat h2{
+    font-size:25px;
+
+    margin-top:5px;
+
+    color:#172727;
+}
+
+.stat p{
+    color:#23806f;
+
+    font-size:8px;
+
+    margin-top:5px;
+}
+
+
+/* ================= SECTIONS ================= */
+
+.section{
+    padding:85px 6%;
+
+    background:#ffffff;
+
+    text-align:center;
+}
+
+.section-tag{
+    color:#155e60;
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    margin-bottom:10px;
+}
+
+.section h2{
+    font-size:34px;
+
+    color:#172727;
+
+    margin-bottom:12px;
+}
+
+.section-text{
+    max-width:600px;
+
+    margin:0 auto 40px;
+
+    color:#748181;
+
+    font-size:13px;
+
+    line-height:1.7;
+}
+
+
+/* ================= FEATURES ================= */
+
+.features{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:16px;
+
+    text-align:left;
+}
+
+.feature{
+    border:1px solid #e2e8e7;
+
+    border-radius:12px;
+
+    padding:23px;
+
+    transition:.2s;
+}
+
+.feature:hover{
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 12px 30px rgba(25,55,55,.08);
+}
+
+.feature-icon{
+    width:42px;
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:9px;
+
+    background:#e6f1f0;
+
+    color:#155e60;
+
+    margin-bottom:14px;
+
+    font-size:18px;
+}
+
+.feature h3{
+    font-size:15px;
+
+    margin-bottom:7px;
+}
+
+.feature p{
+    color:#768383;
+
+    font-size:11px;
+
+    line-height:1.6;
+}
+
+
+/* ================= PROCESS ================= */
+
+.process{
+    background:#f5f7f7;
+
+    padding:80px 6%;
+
+    text-align:center;
+}
+
+.steps{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:15px;
+
+    margin-top:40px;
+}
+
+.step{
+    background:white;
+
+    border:1px solid #e1e7e6;
+
+    border-radius:12px;
+
+    padding:24px 18px;
+}
+
+.step-number{
+    width:38px;
+    height:38px;
+
+    margin:0 auto 14px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#155e60;
+
+    color:white;
+
+    font-size:11px;
+
+    font-weight:bold;
+}
+
+.step h3{
+    font-size:14px;
+
+    margin-bottom:7px;
+}
+
+.step p{
+    color:#778484;
+
+    font-size:10px;
+
+    line-height:1.6;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#142727;
+
+    color:white;
+
+    padding:27px 6%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+}
+
+.footer-brand{
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    font-size:17px;
+
+    font-weight:bold;
+}
+
+.footer-brand img{
+    width:32px;
+    height:32px;
+}
+
+.footer-brand span{
+    color:#5eb6ad;
+}
+
+footer p{
+    color:#92a1a0;
+
+    font-size:10px;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1050px){
+
+    .nav{
+        display:none;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+
+        text-align:center;
+    }
+
+    .hero-left{
+        margin:auto;
+    }
+
+    .hero-text{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .hero-buttons{
+        justify-content:center;
+    }
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .features{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .steps{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+}
+
+
+@media(max-width:650px){
+
+    .navbar{
+        padding:0 5%;
+    }
+
+    .nav{
+        display:none;
+    }
+
+    .admin{
+        display:none;
+    }
+
+    .hero{
+        padding:45px 5%;
+    }
+
+    .hero h1{
+        font-size:43px;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+    }
+
+    .dashboard{
+        width:100%;
+
+        transform:none;
+    }
+
+    .preview-area{
+        min-height:390px;
+    }
+
+    .preview-shadow{
+        width:90%;
+    }
+
+    .mini-stats{
+        grid-template-columns:1fr;
+    }
+
+    .preview-grid{
+        grid-template-columns:1fr;
+    }
+
+    .question-preview{
+        grid-column:auto;
+    }
+
+    .stats,
+    .features,
+    .steps{
+        grid-template-columns:1fr;
+    }
+
+    .section,
+    .process{
+        padding-left:5%;
+        padding-right:5%;
+    }
+
+    footer{
+        flex-direction:column;
+
+        gap:10px;
+
+        text-align:center;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVIGATION ================= -->
+
+<header class="navbar">
+
+    <div class="brand">
+
+        <img
+            src="../logo.png"
+            alt="ExamPortal"
+        >
+
+        <div>
+            Exam<span>Portal</span>
+        </div>
+
+    </div>
+
+
+    <nav class="nav">
+
+        <a href="/index.html">
+            Home
+        </a>
+
+        <a href="#platform">
+            Platform
+        </a>
+
+        <a href="#process">
+            How It Works
+        </a>
+
+        <a href="#about">
+            About
+        </a>
+
+    </nav>
+
+
+    <!-- ================= LOGIN BUTTONS ================= -->
+
+    <div class="login-area">
+
+        <!-- STUDENT LOGIN -->
+
+        <a
+            href="/login.html?type=student"
+            class="login student"
+        >
+            Student Login
+        </a>
+
+
+        <!-- ADMIN LOGIN -->
+
+        <a
+            href="/login.html?type=admin"
+            class="login admin"
+        >
+            Admin Login
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+
+    <!-- LEFT -->
+
+    <div class="hero-left">
+
+        <div class="eyebrow">
+            SMART ONLINE ASSESSMENT
+        </div>
+
+
+        <h1>
+
+            Manage Exams.<br>
+
+            <span>
+                Measure Success.
+            </span>
+
+        </h1>
+
+
+        <p class="hero-text">
+
+            ExamPortal brings online examinations,
+            student activity, results and administration
+            together in one intelligent platform.
+
+            Create. Conduct. Evaluate.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+
+            <!-- STUDENT LOGIN -->
+
+            <a
+                href="/login.html?type=student"
+                class="primary-btn"
+            >
+                Start an Examination →
+            </a>
+
+
+            <a
+                href="#platform"
+                class="outline-btn"
+            >
+                Explore Platform
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= DASHBOARD PREVIEW ================= -->
+
+    <div class="preview-area">
+
+        <div class="preview-shadow"></div>
+
+
+        <div class="dashboard">
+
+
+            <!-- TOP -->
+
+            <div class="dash-top">
+
+                <div class="dash-title">
+                    ExamPortal
+                </div>
+
+                <div class="dash-date">
+                    Today's Overview
+                </div>
+
+            </div>
+
+
+            <!-- MINI STATS -->
+
+            <div class="mini-stats">
+
+
+                <div class="mini-card">
+
+                    <p>
+                        ACTIVE EXAMS
+                    </p>
+
+                    <h3>
+                        08
+                        <span>
+                            Live
+                        </span>
+                    </h3>
+
+                </div>
+
+
+                <div class="mini-card">
+
+                    <p>
+                        STUDENTS
+                    </p>
+
+                    <h3>
+                        1.2K
+                        <span>
+                            +12%
+                        </span>
+                    </h3>
+
+                </div>
+
+
+                <div class="mini-card">
+
+                    <p>
+                        AVG RESULT
+                    </p>
+
+                    <h3>
+                        82%
+                        <span>
+                            ↑
+                        </span>
+                    </h3>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- PREVIEW MAIN -->
+
+            <div class="preview-grid">
+
+
+                <!-- PERFORMANCE -->
+
+                <div class="performance">
+
+                    <div class="card-heading">
+
+                        <strong>
+                            Examination Performance
+                        </strong>
+
+                        <small>
+                            Monthly
+                        </small>
+
+                    </div>
+
+
+                    <div class="chart">
+
+                        <div class="bar"></div>
+
+                        <div class="bar"></div>
+
+                        <div class="bar"></div>
+
+                        <div class="bar"></div>
+
+                        <div class="bar"></div>
+
+                        <div class="bar active"></div>
+
+                        <div class="bar"></div>
+
+                        <div class="bar active"></div>
+
+                    </div>
+
+
+                    <div class="chart-labels">
+
+                        <span>
+                            Jan
+                        </span>
+
+                        <span>
+                            Mar
+                        </span>
+
+                        <span>
+                            May
+                        </span>
+
+                        <span>
+                            Jul
+                        </span>
+
+                        <span>
+                            Sep
+                        </span>
+
+                        <span>
+                            Nov
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LIVE EXAM -->
+
+                <div class="live-card">
+
+                    <div class="live-label">
+                        ● LIVE EXAM
+                    </div>
+
+
+                    <h3>
+
+                        Data Structures
+                        Assessment
+
+                    </h3>
+
+
+                    <div class="live-number">
+                        42
+                    </div>
+
+
+                    <div class="live-info">
+
+                        <span>
+                            Candidates
+                        </span>
+
+                        <span>
+                            30 min
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- QUESTION -->
+
+                <div class="question-preview">
+
+                    <div class="question-info">
+
+                        <small>
+                            CURRENT STUDENT EXAM
+                        </small>
+
+                        <h4>
+                            Question 14 of 20
+                        </h4>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="question-progress">
+
+                            <span></span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FLOATING CARD -->
+
+        <div class="floating">
+
+            <strong>
+                ✓ Exam Activity
+            </strong>
+
+            24 submissions received
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= STATS ================= -->
+
+<section class="stats">
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            ◈
+        </div>
+
+        <small>
+            ONLINE EXAMS
+        </small>
+
+        <h2>
+            100+
+        </h2>
+
+        <p>
+            Assessments available
+        </p>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            ◉
+        </div>
+
+        <small>
+            STUDENTS
+        </small>
+
+        <h2>
+            1K+
+        </h2>
+
+        <p>
+            Registered users
+        </p>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            ↗
+        </div>
+
+        <small>
+            RESULTS
+        </small>
+
+        <h2>
+            3K+
+        </h2>
+
+        <p>
+            Digital evaluations
+        </p>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            ★
+        </div>
+
+        <small>
+            PLATFORM
+        </small>
+
+        <h2>
+            24/7
+        </h2>
+
+        <p>
+            Accessible online
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PLATFORM ================= -->
+
+<section
+    class="section"
+    id="platform"
+>
+
+
+    <div class="section-tag">
+        EXAMPORTAL PLATFORM
+    </div>
+
+
+    <h2>
+        Everything Your Examination Needs
+    </h2>
+
+
+    <p class="section-text">
+
+        A complete examination environment designed
+        around students, administrators, colleges,
+        assessments and results.
+
+    </p>
+
+
+    <div class="features">
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ◉
+            </div>
+
+            <h3>
+                Student Module
+            </h3>
+
+            <p>
+                Students can register, login, attend
+                examinations, view results and manage
+                their profiles.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ◇
+            </div>
+
+            <h3>
+                Examination Module
+            </h3>
+
+            <p>
+                Organize questions and conduct online
+                examinations through a structured
+                digital environment.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ↗
+            </div>
+
+            <h3>
+                Result Management
+            </h3>
+
+            <p>
+                Display examination scores and results
+                after students complete their assessments.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ◆
+            </div>
+
+            <h3>
+                Super Admin
+            </h3>
+
+            <p>
+                Monitor students, colleges, login activity
+                and platform reports from one dashboard.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ▣
+            </div>
+
+            <h3>
+                College Module
+            </h3>
+
+            <p>
+                Maintain college information and
+                monitor college activity within the
+                examination platform.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ★
+            </div>
+
+            <h3>
+                Reports & Reviews
+            </h3>
+
+            <p>
+                Display actual user feedback, ratings
+                and platform activity through reports.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PROCESS ================= -->
+
+<section
+    class="process"
+    id="process"
+>
+
+
+    <div class="section-tag">
+        EXAMINATION FLOW
+    </div>
+
+
+    <h2>
+        From Login to Result
+    </h2>
+
+
+    <div class="steps">
+
+
+        <div class="step">
+
+            <div class="step-number">
+                01
+            </div>
+
+            <h3>
+                Register
+            </h3>
+
+            <p>
+                Create an account through
+                the registration module.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                02
+            </div>
+
+            <h3>
+                Login
+            </h3>
+
+            <p>
+                Enter the correct user module
+                using the login system.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                03
+            </div>
+
+            <h3>
+                Take Exam
+            </h3>
+
+            <p>
+                Answer examination questions
+                and submit the assessment.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                04
+            </div>
+
+            <h3>
+                View Result
+            </h3>
+
+            <p>
+                Check examination performance
+                and result after submission.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section
+    class="section"
+    id="about"
+>
+
+
+    <div class="section-tag">
+        ABOUT EXAMPORTAL
+    </div>
+
+
+    <h2>
+        A Smarter Examination Experience
+    </h2>
+
+
+    <p class="section-text">
+
+        ExamPortal is an Online Examination System
+        developed using HTML, CSS and JavaScript.
+        The application provides Student and Admin
+        modules with Local Storage based signup,
+        login, navigation and data management.
+
+    </p>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+
+    <div class="footer-brand">
+
+        <img
+            src="logo.png"
+            alt="ExamPortal"
+        >
+
+        Exam<span>Portal</span>
+
+    </div>
+
+
+    <p>
+        © 2026 ExamPortal · Smart Online Examination System
+    </p>
+
+</footer>
+
+
+</body>
+</html>

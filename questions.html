@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Questions | ExamPortal</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        html {
+            font-size: 16px;
+            overflow-y: scroll;
+        }
+
+        body {
+            background: #f5f8f8;
+            color: #173033;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(
+                    circle at 10% 15%,
+                    rgba(20, 123, 125, 0.07),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 90% 85%,
+                    rgba(20, 123, 125, 0.06),
+                    transparent 30%
+                );
+        }
+
+        header {
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            background: #ffffff;
+            border-bottom: 1px solid #e1e9e8;
+            box-shadow: 0 4px 18px rgba(23, 48, 51, 0.04);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .brand h2 {
+            font-size: 20px;
+            color: #173033;
+        }
+
+        .brand span {
+            color: #147b7d;
+        }
+
+        header a {
+            color: #5d7070;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        header a:hover {
+            color: #147b7d;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 25px;
+        }
+
+        h1 {
+            font-size: 30px;
+            margin-bottom: 30px;
+            color: #173033;
+        }
+
+        h1 span {
+            color: #147b7d;
+        }
+
+        .form-card,
+        .question-list {
+            background: #ffffff;
+            border: 1px solid #dbe6e5;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(25, 55, 55, 0.045);
+        }
+
+        .form-card {
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .form-card h2 {
+            margin-bottom: 25px;
+            color: #203536;
+            font-size: 22px;
+        }
+
+        label {
+            display: block;
+            color: #607474;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            background: #ffffff;
+            color: #173033;
+            border: 1px solid #d8e3e2;
+            border-radius: 9px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #9aa8a8;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #147b7d;
+            box-shadow: 0 0 0 3px rgba(20, 123, 125, 0.08);
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        .btn {
+            margin-top: 20px;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 9px;
+            color: #ffffff;
+            cursor: pointer;
+            background: #147b7d;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 8px 20px rgba(20, 123, 125, 0.16);
+            transition: 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #10686a;
+            transform: translateY(-1px);
+        }
+
+        .question-list {
+            padding: 25px;
+        }
+
+        .question-list h2 {
+            color: #203536;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            background: #f8fbfb;
+            border: 1px solid #e1e9e8;
+        }
+
+        .question:last-child {
+            margin-bottom: 0;
+        }
+
+        .question h3 {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            color: #203536;
+        }
+
+        .question p {
+            color: #708080;
+            font-size: 13px;
+            line-height: 1.5;
+            margin: 5px 0;
+        }
+
+        .correct {
+            color: #147b7d !important;
+            font-weight: 600;
+        }
+
+        .delete {
+            margin-top: 12px;
+            padding: 7px 13px;
+            border-radius: 7px;
+            cursor: pointer;
+            background: #fff2f3;
+            border: 1px solid #f3c8cc;
+            color: #c64550;
+            font-size: 12px;
+        }
+
+        .delete:hover {
+            background: #ffe7e9;
+        }
+
+        .empty {
+            text-align: center;
+            color: #7b8b8b;
+            padding: 30px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 650px) {
+            header {
+                padding: 0 20px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+
+            .form-card,
+            .question-list {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="brand">
+            <img src="logo.png" alt="ExamPortal Logo">
+            <h2>Exam<span>Portal</span></h2>
+        </div>
+
+        <a href="admin.html">Back to Admin Dashboard</a>
+    </header>
+
+    <main class="container">
+
+        <h1>
+            Manage <span>Questions</span>
+        </h1>
+
+        <section class="form-card">
+
+            <h2>Add New Question</h2>
+
+            <div class="grid">
+
+                <div>
+                    <label for="subject">Subject</label>
+
+                    <select id="subject">
+                        <option value="">Select Subject</option>
+                        <option value="Java">Java</option>
+                        <option value="Python">Python</option>
+                        <option value="C">C</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="C++">C++</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="questionNumber">Question Number</label>
+
+                    <input
+                        type="number"
+                        id="questionNumber"
+                        placeholder="1"
+                        min="1"
+                    >
+                </div>
+
+                <div class="full">
+                    <label for="question">Question</label>
+
+                    <textarea
+                        id="question"
+                        placeholder="Enter question here..."
+                    ></textarea>
+                </div>
+
+                <div>
+                    <label for="optionA">Option A</label>
+
+                    <input
+                        type="text"
+                        id="optionA"
+                        placeholder="Option A"
+                    >
+                </div>
+
+                <div>
+                    <label for="optionB">Option B</label>
+
+                    <input
+                        type="text"
+                        id="optionB"
+                        placeholder="Option B"
+                    >
+                </div>
+
+                <div>
+                    <label for="optionC">Option C</label>
+
+                    <input
+                        type="text"
+                        id="optionC"
+                        placeholder="Option C"
+                    >
+                </div>
+
+                <div>
+                    <label for="optionD">Option D</label>
+
+                    <input
+                        type="text"
+                        id="optionD"
+                        placeholder="Option D"
+                    >
+                </div>
+
+                <div>
+                    <label for="correct">Correct Answer</label>
+
+                    <select id="correct">
+                        <option value="">Select Correct Answer</option>
+                        <option value="A">Option A</option>
+                        <option value="B">Option B</option>
+                        <option value="C">Option C</option>
+                        <option value="D">Option D</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <button class="btn" onclick="addQuestion()">
+                Add Question
+            </button>
+
+        </section>
+
+        <section class="question-list">
+
+            <h2>Question Bank</h2>
+
+            <div id="questionList"></div>
+
+        </section>
+
+    </main>
+
+    <script>
+        let questions =
+            JSON.parse(localStorage.getItem("adminQuestions")) || [];
+
+        function addQuestion() {
+
+            const subject =
+                document.getElementById("subject").value;
+
+            const number =
+                document.getElementById("questionNumber").value;
+
+            const question =
+                document.getElementById("question").value.trim();
+
+            const optionA =
+                document.getElementById("optionA").value.trim();
+
+            const optionB =
+                document.getElementById("optionB").value.trim();
+
+            const optionC =
+                document.getElementById("optionC").value.trim();
+
+            const optionD =
+                document.getElementById("optionD").value.trim();
+
+            const correct =
+                document.getElementById("correct").value;
+
+            if (
+                !subject ||
+                !number ||
+                !question ||
+                !optionA ||
+                !optionB ||
+                !optionC ||
+                !optionD ||
+                !correct
+            ) {
+                alert("Please fill all fields.");
+                return;
+            }
+
+            questions.push({
+                subject: subject,
+                number: number,
+                question: question,
+                options: {
+                    A: optionA,
+                    B: optionB,
+                    C: optionC,
+                    D: optionD
+                },
+                correct: correct
+            });
+
+            localStorage.setItem(
+                "adminQuestions",
+                JSON.stringify(questions)
+            );
+
+            clearForm();
+            displayQuestions();
+
+            alert("Question added successfully!");
+        }
+
+        function displayQuestions() {
+
+            const list =
+                document.getElementById("questionList");
+
+            list.innerHTML = "";
+
+            if (questions.length === 0) {
+
+                list.innerHTML = `
+                    <p class="empty">
+                        No questions added yet.
+                    </p>
+                `;
+
+                return;
+            }
+
+            questions.forEach((q, index) => {
+
+                list.innerHTML += `
+                    <div class="question">
+
+                        <h3>
+                            Q${escapeHtml(q.number)}.
+                            ${escapeHtml(q.question)}
+                        </h3>
+
+                        <p>
+                            Subject:
+                            ${escapeHtml(q.subject)}
+                        </p>
+
+                        <p>
+                            A. ${escapeHtml(q.options.A)}
+                        </p>
+
+                        <p>
+                            B. ${escapeHtml(q.options.B)}
+                        </p>
+
+                        <p>
+                            C. ${escapeHtml(q.options.C)}
+                        </p>
+
+                        <p>
+                            D. ${escapeHtml(q.options.D)}
+                        </p>
+
+                        <p class="correct">
+                            Correct Answer:
+                            Option ${escapeHtml(q.correct)}
+                        </p>
+
+                        <button
+                            class="delete"
+                            onclick="deleteQuestion(${index})"
+                        >
+                            Delete
+                        </button>
+
+                    </div>
+                `;
+            });
+        }
+
+        function deleteQuestion(index) {
+
+            if (confirm("Delete this question?")) {
+
+                questions.splice(index, 1);
+
+                localStorage.setItem(
+                    "adminQuestions",
+                    JSON.stringify(questions)
+                );
+
+                displayQuestions();
+            }
+        }
+
+        function clearForm() {
+
+            document.getElementById("subject").value = "";
+            document.getElementById("questionNumber").value = "";
+            document.getElementById("question").value = "";
+            document.getElementById("optionA").value = "";
+            document.getElementById("optionB").value = "";
+            document.getElementById("optionC").value = "";
+            document.getElementById("optionD").value = "";
+            document.getElementById("correct").value = "";
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? "").replace(
+                /[&<>"']/g,
+                function (character) {
+                    return {
+                        "&": "&amp;",
+                        "<": "&lt;",
+                        ">": "&gt;",
+                        '"': "&quot;",
+                        "'": "&#039;"
+                    }[character];
+                }
+            );
+        }
+
+        displayQuestions();
+    </script>
+
+</body>
+</html>
